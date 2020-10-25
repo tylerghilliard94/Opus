@@ -41,6 +41,7 @@ namespace Fullstack_capstone
                 });
 
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+            services.AddTransient<IPrimaryFocusRepository, PrimaryFocusRepository>();
             services.AddControllers();
         }
 

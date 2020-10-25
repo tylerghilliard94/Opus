@@ -22,7 +22,7 @@ export default function Header() {
     <>
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand tag={RRNavLink} to="/">Tabloid</NavbarBrand>
+          <NavbarBrand tag={RRNavLink} to="/">Artorama</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
@@ -32,36 +32,15 @@ export default function Header() {
                   <NavLink tag={RRNavLink} to="/">Home</NavLink>
                 </NavItem>
               }
-              {isLoggedIn && activeUser.userTypeId === 1 ?
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/tag">Tag</NavLink>
-                </NavItem> : null
-              }
+
               {isLoggedIn &&
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/post">Posts</NavLink>
                 </NavItem>
               }
-              {isLoggedIn &&
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/post/User">User's Posts</NavLink>
-                </NavItem>
-              }
-              {isLoggedIn && activeUser.userTypeId === 1 ?
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/category">Category</NavLink>
-                </NavItem> : null
-              }
-              {isLoggedIn && activeUser.userTypeId === 1 ?
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/userProfile">UserProfiles</NavLink>
-                </NavItem> : null
-              }
-              {isLoggedIn && activeUser.userTypeId === 1 ?
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/reaction">Reactions</NavLink>
-                </NavItem> : null
-              }
+
+
+
             </Nav>
 
             <Nav navbar>
