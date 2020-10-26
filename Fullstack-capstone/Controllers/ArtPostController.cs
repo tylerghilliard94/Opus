@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Fullstack_capstone.Controllers
 {
- 
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ArtPostController : ControllerBase
@@ -55,7 +55,7 @@ namespace Fullstack_capstone.Controllers
             return Ok(_artPostRepository.SearchArtPosts(CategoryCriterion, ArtTypeCriterion));
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public IActionResult Edit(ArtPost artPost)
         {
             _artPostRepository.UpdateArtPost(artPost);

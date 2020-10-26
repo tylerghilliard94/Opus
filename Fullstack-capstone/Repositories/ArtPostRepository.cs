@@ -366,13 +366,25 @@ namespace Fullstack_capstone.Repositories
                               LEFT JOIN UserProfile u ON ap.UserProfileId = u.Id
                               LEFT JOIN Categories c ON ap.CategoryId = c.Id
                               LEFT JOIN ArtType at ON ap.ArtTypeId = at.Id
-                      WHERE ap.CategoryId = @CategoryCriterion AND ap.ArtTypeId = @ArtTypeCriterion AND ap.IsDeleted = 0
+                      
                         
-                        ORDER BY ap.PostDate
+                        
                     ";
+                    if (CategoryCriterion == 0 && ArtTypeCriterion == 0)
+                    {
+                        cmd.CommandText += " WHERE ap.IsDeleted = 0";
+                    }
+                    else if (ArtTypeCriterion == 0){
+                        cmd.CommandText += " WHERE ap.CategoryId = @CategoryCriterion AND ap.IsDeleted = 0";
+                    }else if (CategoryCriterion == 0){
+                        cmd.CommandText += " WHERE ap.ArtTypeId = @ArtTypeCriterion AND ap.IsDeleted = 0";
+                    }
+                    else
+                    {
+                        cmd.CommandText += "WHERE ap.CategoryId = @CategoryCriterion AND ap.ArtTypeId = @ArtTypeCriterion AND ap.IsDeleted = 0";
+                    }
 
-
-
+                    cmd.CommandText += "ORDER BY ap.PostDate";
 
                     DbUtils.AddParameter(cmd, "@CategoryCriterion", CategoryCriterion);
                     DbUtils.AddParameter(cmd, "@ArtTypeCriterion", ArtTypeCriterion);
