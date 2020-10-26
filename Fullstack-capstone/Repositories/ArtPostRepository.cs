@@ -349,7 +349,7 @@ namespace Fullstack_capstone.Repositories
 
         }
 
-        public List<ArtPost> SearchArtPosts(int CategoryCriterion, int ArtTypeCriterion)
+        public List<ArtPost> SearchArtPosts(int CategoryCriterion, int ArtTypeCriterion, bool latestSwitch, bool trendingSwitch)
         {
 
             using (var conn = Connection)
@@ -358,7 +358,7 @@ namespace Fullstack_capstone.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText =
-                       @" SELECT ap.Id, ap.UserProfileId, ap.Image, ap.Title, ap.PostDate, ap.Description, ap.CategoryId, ap.ArtTypeId,
+                       @" SELECT ap.Id, ap.UserProfileId, ap.Image, ap.Title, ap.PostDate, ap.Description, ap.CategoryId, ap.ArtTypeId, ap.Likes,
                             at.Name AS ArtTypeName,
                             c.Name AS CategoryName,
                             u.Displayname AS UserDisplayName
@@ -384,7 +384,15 @@ namespace Fullstack_capstone.Repositories
                         cmd.CommandText += "WHERE ap.CategoryId = @CategoryCriterion AND ap.ArtTypeId = @ArtTypeCriterion AND ap.IsDeleted = 0";
                     }
 
-                    cmd.CommandText += "ORDER BY ap.PostDate";
+                    if(latestSwitch == true)
+                    {
+                        cmd.CommandText += "ORDER BY ap.PostDate";
+                    }
+                    else if(trendingSwitch == true)
+                    {
+                        cmd.CommandText += "ORDER BY ap.Likes DESC";
+                    }
+                    
 
                     DbUtils.AddParameter(cmd, "@CategoryCriterion", CategoryCriterion);
                     DbUtils.AddParameter(cmd, "@ArtTypeCriterion", ArtTypeCriterion);

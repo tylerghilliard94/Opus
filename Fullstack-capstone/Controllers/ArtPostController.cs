@@ -50,9 +50,9 @@ namespace Fullstack_capstone.Controllers
         }
 
         [HttpGet("search")]
-        public IActionResult SearchArtPosts(int CategoryCriterion, int ArtTypeCriterion)
+        public IActionResult SearchArtPosts(int CategoryCriterion, int ArtTypeCriterion, bool latestSwitch, bool trendingSwitch)
         {
-            return Ok(_artPostRepository.SearchArtPosts(CategoryCriterion, ArtTypeCriterion));
+            return Ok(_artPostRepository.SearchArtPosts(CategoryCriterion, ArtTypeCriterion, latestSwitch, trendingSwitch));
         }
 
         [HttpPut]

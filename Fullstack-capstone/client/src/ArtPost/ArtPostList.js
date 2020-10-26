@@ -23,7 +23,7 @@ export default function ArtPostList() {
 
     return (
         <>
-            <Row sm={2}>
+            <Row>
                 {artPosts.map(post => {
                     return <ArtPost post={post} />
                 })}

@@ -28,8 +28,8 @@ export default function ArtPost(props) {
 
         <Link to={`artpost/${props.post.id}`}><img style={{
             flex: 1,
-            width: 150,
-            height: 150,
+            width: 200,
+            height: 200,
             resizeMode: 'contain'
         }} src={props.post.image} alt={props.post.description} /></Link>
 

@@ -11,7 +11,7 @@ namespace Fullstack_capstone.Repositories
         List<ArtPost> GetAllArtPostsByUser(int userId);
         ArtPost GetArtPostById(int id);
         void UpdateArtPost(ArtPost artPost);
-        public List<ArtPost> SearchArtPosts(int CategoryCriterion, int ArtTypeCriterion);
+        public List<ArtPost> SearchArtPosts(int CategoryCriterion, int ArtTypeCriterion, bool latestSwitch, bool trendingSwitch);
 
         public void AddLike(int id, int likes);
         public void RemoveLike(int id, int likes);
