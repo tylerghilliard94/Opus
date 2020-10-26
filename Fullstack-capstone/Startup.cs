@@ -42,6 +42,13 @@ namespace Fullstack_capstone
 
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<IPrimaryFocusRepository, PrimaryFocusRepository>();
+            services.AddTransient<IArtPostRepository, ArtPostRepository>();
+            services.AddTransient<IArtTypeRepository, ArtTypeRepository>();
+            services.AddTransient<ICategoriesRepository, CategoriesRepository>();
+            services.AddTransient<ICommentsRepository, CommentsRepository>();
+            services.AddTransient<IFavoritesRepository, FavoritesRepository>();
+            services.AddTransient<IFollowingRepository, FollowingRepository>();
+            services.AddTransient<ILikesRepository, LikesRepository>();
             services.AddControllers();
         }
 

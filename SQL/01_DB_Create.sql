@@ -101,6 +101,7 @@ CREATE TABLE [ArtPost] (
   [CategoryId] integer NOT NULL,
   [ArtTypeId] integer NOT NULL,
   [IsDeleted] integer NOT NULL DEFAULT 0,
+   [Likes] integer NOT NULL DEFAULT 0,
 
   CONSTRAINT [FK_ArtPost_UserProfile] FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id]),
   CONSTRAINT [FK_ArtPost_Category] FOREIGN KEY ([CategoryId]) REFERENCES [Categories] ([Id]),
@@ -114,6 +115,7 @@ CREATE TABLE [Comments] (
   [UserProfileId] integer NOT NULL,
   [PostId] integer NOT NULL,
   [Content] text NOT NULL,
+  [PostDate] datetime NOT NULL,
 
   CONSTRAINT [FK_Comments_UserProfile] FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id]),
   CONSTRAINT [FK_Comments_Post] FOREIGN KEY ([PostId]) REFERENCES [ArtPost] ([Id])
