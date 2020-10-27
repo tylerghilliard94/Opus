@@ -423,7 +423,7 @@ namespace Fullstack_capstone.Repositories
 
         }
 
-        public List<ArtPost> SearchArtPosts(int CategoryCriterion, int ArtTypeCriterion, bool latestSwitch, bool trendingSwitch, List<Following> follows)
+        public List<ArtPost> SearchArtPosts(int CategoryCriterion, int ArtTypeCriterion, bool latestSwitch, bool trendingSwitch, List<Following> follows, List<Favorite> favorites)
         {
 
             using (var conn = Connection)
@@ -473,6 +473,22 @@ namespace Fullstack_capstone.Repositories
 
                         }
 
+                        cmd.CommandText += "ORDER BY ap.PostDate;";
+                    }else if(favorites.Count != 0)
+                    {
+                        foreach (Favorite favorite in favorites)
+                        {
+                            if(favorite == favorites[0])
+                            {
+                                cmd.CommandText += $"AND ap.Id = {favorite.PostId}";
+                            }
+                            else
+                            {
+                                cmd.CommandText += $"OR ap.Id = {favorite.PostId}";
+                            }
+                            
+
+                        }
                         cmd.CommandText += "ORDER BY ap.PostDate;";
                     }
                     

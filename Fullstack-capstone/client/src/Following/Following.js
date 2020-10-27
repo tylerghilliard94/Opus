@@ -34,12 +34,12 @@ export default function Following(props) {
 
     const handleFollow = () => {
         saveFollow(localFollow)
-        props.setRefresh(3)
+        props.setRefresh(4)
     }
 
     const handleUnFollow = () => {
         deleteFollow(follow.id)
-        props.setRefresh(2)
+        props.setRefresh(3)
 
     }
 

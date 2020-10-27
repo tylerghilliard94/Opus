@@ -14,10 +14,12 @@ namespace Fullstack_capstone.Controllers
     {
         private readonly IArtPostRepository _artPostRepository;
         private readonly IFollowingRepository _followingRepository;
-        public ArtPostController(IArtPostRepository artPostRepository, IFollowingRepository followingRepository)
+        private readonly IFavoritesRepository _favoritesRepository;
+        public ArtPostController(IArtPostRepository artPostRepository, IFollowingRepository followingRepository, IFavoritesRepository favoritesRepository)
         {
             _artPostRepository = artPostRepository;
             _followingRepository = followingRepository;
+            _favoritesRepository = favoritesRepository;
         }
 
 
@@ -56,17 +58,25 @@ namespace Fullstack_capstone.Controllers
         public IActionResult SearchArtPosts(int userId, int CategoryCriterion, int ArtTypeCriterion, bool latestSwitch, bool trendingSwitch, bool followingSwitch)
         {   if(followingSwitch == true)
             {
+                List<Favorite> favorites = new List<Favorite>();
                 List<Following> follows = _followingRepository.GetAllFollows(userId);
 
 
-                return Ok(_artPostRepository.SearchArtPosts(CategoryCriterion, ArtTypeCriterion, latestSwitch, trendingSwitch, follows));
+                return Ok(_artPostRepository.SearchArtPosts(CategoryCriterion, ArtTypeCriterion, latestSwitch, trendingSwitch, follows, favorites));
             
+            }else if(latestSwitch == false && trendingSwitch == false && followingSwitch == false)
+            {
+                List<Favorite> favorites = _favoritesRepository.GetAllFavorites(userId);
+                    List<Following> follows = new List<Following>();
+
+                return Ok(_artPostRepository.SearchArtPosts(CategoryCriterion, ArtTypeCriterion, latestSwitch, trendingSwitch, follows, favorites));
             }
             else
             {
+                List<Favorite> favorites = new List<Favorite>();
                 List<Following> follows = new List<Following>();
 
-                return Ok(_artPostRepository.SearchArtPosts(CategoryCriterion, ArtTypeCriterion, latestSwitch, trendingSwitch, follows));
+                return Ok(_artPostRepository.SearchArtPosts(CategoryCriterion, ArtTypeCriterion, latestSwitch, trendingSwitch, follows, favorites));
             }
             
         }

@@ -34,12 +34,12 @@ export default function Favorites(props) {
 
     const handleFavorite = () => {
         saveFavorite(localFavorite)
-        props.setRefresh(4)
+        props.setRefresh(6)
     }
 
     const handleUnFavorite = () => {
         deleteFavorite(favorite.id)
-        props.setRefresh(3)
+        props.setRefresh(5)
 
     }
 
