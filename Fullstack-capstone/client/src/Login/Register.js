@@ -27,7 +27,7 @@ export default function Register() {
   }, [])
   const registerClick = (e) => {
     e.preventDefault();
-    debugger
+
 
     if (password && password !== confirmPassword) {
       alert("Passwords don't match. Do better.");
@@ -39,7 +39,7 @@ export default function Register() {
   };
   const checkUploadResult = (resultEvent) => {
     if (resultEvent.event === 'success') {
-      debugger
+
       setImage(resultEvent.info.secure_url)
       setImageName(resultEvent.info.original_filename + `.${resultEvent.info.format}`)
 

@@ -70,6 +70,20 @@ namespace Fullstack_capstone.Controllers
         }
 
 
+        [HttpPut("addLike/{id}/{likes}")]
+        public IActionResult AddLike(int id, int likes)
+        {
+            _artPostRepository.AddLike(id, likes);
+            return Ok();
+        }
+
+        [HttpPut("removeLike/{id}/{likes}")]
+        public IActionResult RemoveLike(int id, int likes)
+        {
+            _artPostRepository.RemoveLike(id, likes);
+            return Ok();
+        }
+
 
     }
 }

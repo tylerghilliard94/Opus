@@ -18,9 +18,9 @@ export function UserProfileProvider(props) {
 
   const [allUserProfiles, setAllUserProfiles] = useState([]);
   const [singleUserProfile, setSingleUserProfile] = useState({ userType: {} });
-  const [deactivatedUsers, setDeactivatedUsers] = useState([]);
-  const [allUserTypes, setAllUserTypes] = useState([]);
-  const [adminProfiles, setAdminProfiles] = useState([]);
+
+
+
 
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export function UserProfileProvider(props) {
 
 
   const login = (email, pw) => {
-    debugger
+
     return firebase.auth().signInWithEmailAndPassword(email, pw)
       .then((signInResponse) => getUserProfile(signInResponse.user.uid))
       .then((userProfile) => {
@@ -63,7 +63,7 @@ export function UserProfileProvider(props) {
   const getToken = () => firebase.auth().currentUser.getIdToken();
 
   const getUserProfile = (firebaseUserId) => {
-    debugger
+
     return getToken().then((token) =>
       fetch(`${apiUrl}/${firebaseUserId}`, {
         method: "GET",
@@ -97,6 +97,7 @@ export function UserProfileProvider(props) {
   };
 
   const getUserProfileById = (userId) => {
+
     return getToken().then((token) =>
       fetch(`${apiUrl}/details/${userId}`, {
         method: "GET",
@@ -106,83 +107,14 @@ export function UserProfileProvider(props) {
       }).then(resp => resp.json()))
       .then((resp) => setSingleUserProfile(resp));;
   };
-  const deactivateUserProfile = (userId) => {
 
-    return getToken().then((token) =>
-      fetch(`${apiUrl}/deactivate/${userId}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        }
 
-      }));
 
-  };
 
-  const getDeactivatedUsers = () => {
-    return getToken().then((token) =>
-      fetch(`${apiUrl}/deactivatedProfiles`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }).then(resp => resp.json()))
-      .then((resp) => setDeactivatedUsers(resp));
-  };
-
-  const reactivateUserProfile = (userId) => {
-
-    return getToken().then((token) =>
-      fetch(`${apiUrl}/reactivate/${userId}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        }
-      }));
-
-  };
-
-  const getAllUserTypes = () => {
-    return getToken().then((token) =>
-      fetch(`${apiUrl}/userTypes`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }).then(resp => resp.json()))
-      .then((resp) => setAllUserTypes(resp));
-  };
-
-  const editUserProfileType = (id, user) => {
-
-    return getToken().then((token) =>
-      fetch(`${apiUrl}/edit/${id}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(user)
-
-      }));
-
-  };
-  const getAllAdminUserProfiles = () => {
-    return getToken().then((token) =>
-      fetch(`${apiUrl}/admin`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }).then(resp => resp.json()))
-      .then((resp) => setAdminProfiles(resp));
-  };
 
 
   return (
-    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getToken, userProfile, activeUser, getAllUserProfiles, allUserProfiles, getUserProfileById, singleUserProfile, deactivatedUsers, getDeactivatedUsers, deactivateUserProfile, reactivateUserProfile, allUserTypes, getAllUserTypes, editUserProfileType, getAllAdminUserProfiles, adminProfiles }}>
+    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getToken, userProfile, activeUser, getAllUserProfiles, allUserProfiles, getUserProfileById, singleUserProfile }}>
       {isFirebaseReady
         ? props.children
         : <Spinner className="app-spinner dark" />}

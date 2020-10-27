@@ -114,7 +114,7 @@ namespace Fullstack_capstone.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                    SELECT ap.Id, ap.UserProfileId, ap.Image, ap.Title, ap.PostDate, ap.Description, ap.CategoryId, ap.ArtTypeId,
+                    SELECT ap.Id, ap.UserProfileId, ap.Image, ap.Title, ap.PostDate, ap.Description, ap.CategoryId, ap.ArtTypeId, ap.Likes,
                             at.Name AS ArtTypeName,
                             c.Name AS CategoryName,
                             u.Displayname AS UserDisplayName
@@ -122,6 +122,8 @@ namespace Fullstack_capstone.Repositories
                               LEFT JOIN UserProfile u ON ap.UserProfileId = u.Id
                               LEFT JOIN Categories c ON ap.CategoryId = c.Id
                               LEFT JOIN ArtType at ON ap.ArtTypeId = at.Id
+
+                        WHERE ap.Id = @id
               
                        ;
                      
@@ -160,7 +162,8 @@ namespace Fullstack_capstone.Repositories
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                                 DisplayName = reader.GetString(reader.GetOrdinal("UserDisplayName"))
-                            }
+                            },
+                            Likes = reader.GetInt32(reader.GetOrdinal("Likes"))
 
                         };
                     }
@@ -312,9 +315,9 @@ namespace Fullstack_capstone.Repositories
                         Likes = @Likes
                         WHERE Id = @id";
 
-                    
+                    likes++;
                     cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Parameters.AddWithValue("@Likes", likes + 1);
+                    cmd.Parameters.AddWithValue("@Likes", likes);
 
                     cmd.ExecuteNonQuery();
 
@@ -337,9 +340,9 @@ namespace Fullstack_capstone.Repositories
                         Likes = @Likes
                         WHERE Id = @id";
 
-
+                    likes--;
                     cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Parameters.AddWithValue("@Likes", likes - 1);
+                    cmd.Parameters.AddWithValue("@Likes", likes);
 
 
                     cmd.ExecuteNonQuery();

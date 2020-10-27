@@ -18,7 +18,7 @@ namespace Fullstack_capstone.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Favorite (UserProfileId, PostId)
+                    cmd.CommandText = @"INSERT INTO likes (UserProfileId, PostId)
                                         OUTPUT INSERTED.ID
                                         VALUES (@UserProfileId, @PostId)";
                     DbUtils.AddParameter(cmd, "@UserProfileId", like.UserProfileId);
@@ -39,9 +39,9 @@ namespace Fullstack_capstone.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SELECT l.Id, l.UserProfileId, l.PostId
-                            Likes l
-              
+                       SELECT Id, UserProfileId, PostId
+                            FROM Likes
+                        WHERE UserProfileId = @userId AND PostId = @postId
                         
                       
                        ";
@@ -86,7 +86,7 @@ namespace Fullstack_capstone.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        DELETE FROM Like
+                        DELETE FROM Likes
                        
                         WHERE Id = @id";
 
