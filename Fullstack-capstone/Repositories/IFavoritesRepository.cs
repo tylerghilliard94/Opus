@@ -8,6 +8,9 @@ namespace Fullstack_capstone.Repositories
         void Add(Favorite favorite);
         void DeleteFavorite(int id);
         List<Favorite> GetAllFavorites(int id);
-       
+
+        public Favorite GetFavorite(int userId, int postId);
+
+
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Fullstack_capstone.Models;
 using Fullstack_capstone.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace Fullstack_capstone.Controllers
 {
@@ -12,9 +13,11 @@ namespace Fullstack_capstone.Controllers
     public class ArtPostController : ControllerBase
     {
         private readonly IArtPostRepository _artPostRepository;
-        public ArtPostController(IArtPostRepository artPostRepository)
+        private readonly IFollowingRepository _followingRepository;
+        public ArtPostController(IArtPostRepository artPostRepository, IFollowingRepository followingRepository)
         {
             _artPostRepository = artPostRepository;
+            _followingRepository = followingRepository;
         }
 
 
@@ -50,9 +53,22 @@ namespace Fullstack_capstone.Controllers
         }
 
         [HttpGet("search")]
-        public IActionResult SearchArtPosts(int CategoryCriterion, int ArtTypeCriterion, bool latestSwitch, bool trendingSwitch)
-        {
-            return Ok(_artPostRepository.SearchArtPosts(CategoryCriterion, ArtTypeCriterion, latestSwitch, trendingSwitch));
+        public IActionResult SearchArtPosts(int userId, int CategoryCriterion, int ArtTypeCriterion, bool latestSwitch, bool trendingSwitch, bool followingSwitch)
+        {   if(followingSwitch == true)
+            {
+                List<Following> follows = _followingRepository.GetAllFollows(userId);
+
+
+                return Ok(_artPostRepository.SearchArtPosts(CategoryCriterion, ArtTypeCriterion, latestSwitch, trendingSwitch, follows));
+            
+            }
+            else
+            {
+                List<Following> follows = new List<Following>();
+
+                return Ok(_artPostRepository.SearchArtPosts(CategoryCriterion, ArtTypeCriterion, latestSwitch, trendingSwitch, follows));
+            }
+            
         }
 
         [HttpPut]

@@ -48,9 +48,9 @@ export function ArtPostProvider(props) {
     };
 
 
-    const searchArtPosts = (categoryCriterion, artTypeCriterion, latestSwitch, trendingSwitch) => {
+    const searchArtPosts = (userId, categoryCriterion, artTypeCriterion, latestSwitch, trendingSwitch, followingSwitch) => {
         return getToken().then((token) =>
-            fetch(`/api/artpost/search?CategoryCriterion=${categoryCriterion}&ArtTypeCriterion=${artTypeCriterion}&LatestSwitch=${latestSwitch}&TrendingSwitch=${trendingSwitch}`, {
+            fetch(`/api/artpost/search?UserId=${userId}&CategoryCriterion=${categoryCriterion}&ArtTypeCriterion=${artTypeCriterion}&LatestSwitch=${latestSwitch}&TrendingSwitch=${trendingSwitch}&FollowingSwitch=${followingSwitch}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`

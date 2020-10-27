@@ -8,5 +8,6 @@ namespace Fullstack_capstone.Repositories
         void Add(Following follow);
         void DeleteFollow(int id);
         List<Following> GetAllFollows(int id);
+        public Following GetFollowById(int subscriberid, int subscribedToId);
     }
 }

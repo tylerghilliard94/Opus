@@ -240,6 +240,77 @@ namespace Fullstack_capstone.Repositories
             }
         }
 
+
+        public List<ArtPost> GetAllArtPostsByFollows(List<Following> follows)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                       SELECT ap.Id, ap.UserProfileId, ap.Image, ap.Title, ap.PostDate, ap.Description, ap.CategoryId, ap.ArtTypeId,
+                            at.Name AS ArtTypeName,
+                            c.Name AS CategoryName,
+                            u.Displayname AS UserDisplayName
+                         FROM ArtPost ap
+                              LEFT JOIN UserProfile u ON ap.UserProfileId = u.Id
+                              LEFT JOIN Categories c ON ap.CategoryId = c.Id
+                              LEFT JOIN ArtType at ON ap.ArtTypeId = at.Id
+                        WHERE isDeleted = 0";
+                    foreach(Following follow in follows)
+                    {
+                        cmd.CommandText += $"AND ap.UserProfileId = {follow.SubscribedToId}";
+                      
+                    }
+
+                    cmd.CommandText += "ORDER BY ap.PostDate;";
+                      
+                      
+
+                    
+                    List<ArtPost> artPosts = new List<ArtPost>();
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        artPosts.Add(new ArtPost()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                            Image = reader.GetString(reader.GetOrdinal("Image")),
+
+                            Title = reader.GetString(reader.GetOrdinal("Title")),
+                            PostDate = reader.GetDateTime(reader.GetOrdinal("PostDate")),
+
+                            Description = DbUtils.GetString(reader, "Description"),
+                            CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                            ArtTypeId = reader.GetInt32(reader.GetOrdinal("ArtTypeId")),
+                            Category = new Category()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                                Name = reader.GetString(reader.GetOrdinal("CategoryName"))
+                            },
+                            ArtType = new ArtType()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("ArtTypeId")),
+                                Name = reader.GetString(reader.GetOrdinal("ArtTypeName"))
+                            },
+                            UserProfile = new UserProfile()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                                DisplayName = reader.GetString(reader.GetOrdinal("UserDisplayName"))
+                            }
+
+                        });
+                    }
+
+                    reader.Close();
+
+                    return artPosts;
+                }
+            }
+        }
         public void UpdateArtPost(ArtPost artPost)
         {
 
@@ -352,7 +423,7 @@ namespace Fullstack_capstone.Repositories
 
         }
 
-        public List<ArtPost> SearchArtPosts(int CategoryCriterion, int ArtTypeCriterion, bool latestSwitch, bool trendingSwitch)
+        public List<ArtPost> SearchArtPosts(int CategoryCriterion, int ArtTypeCriterion, bool latestSwitch, bool trendingSwitch, List<Following> follows)
         {
 
             using (var conn = Connection)
@@ -394,6 +465,15 @@ namespace Fullstack_capstone.Repositories
                     else if(trendingSwitch == true)
                     {
                         cmd.CommandText += "ORDER BY ap.Likes DESC";
+                    }else if(follows.Count != 0)
+                    {
+                        foreach (Following follow in follows)
+                        {
+                            cmd.CommandText += $"AND ap.UserProfileId = {follow.SubscribedToId}";
+
+                        }
+
+                        cmd.CommandText += "ORDER BY ap.PostDate;";
                     }
                     
 

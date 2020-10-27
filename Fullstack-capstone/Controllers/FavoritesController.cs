@@ -31,15 +31,21 @@ namespace Fullstack_capstone.Controllers
 
         //Get All Users
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult GetAllFavorites(int id)
         {
             return Ok(_favoritesRepository.GetAllFavorites(id));
         }
 
-       
-       
+        [HttpGet("{userId}/{postId}")]
+        public IActionResult GetFavorite(int userId, int postId)
+        {
+            return Ok(_favoritesRepository.GetFavorite(userId, postId));
+        }
 
-       
+
+
+
+
 
         [HttpPut("delete/{id}")]
         public IActionResult Delete(int id)
