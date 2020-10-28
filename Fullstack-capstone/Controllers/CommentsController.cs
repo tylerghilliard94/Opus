@@ -24,16 +24,16 @@ namespace Fullstack_capstone.Controllers
         public IActionResult Post(Comment comment)
         {
 
-
+            comment.PostDate = DateTime.Now;
             _commentsRepository.Add(comment);
             return Ok();
         }
 
         //Get All Users
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("all/{id}")]
+        public IActionResult Get(int id)
         {
-            return Ok(_commentsRepository.GetAllComments());
+            return Ok(_commentsRepository.GetAllComments(id));
         }
 
         //Get User by User.Id
@@ -47,9 +47,9 @@ namespace Fullstack_capstone.Controllers
 
 
         [HttpPut("{id}")]
-        public IActionResult Edit(Comment comment)
+        public IActionResult Edit(int id, Comment comment)
         {
-            _commentsRepository.UpdateComment(comment);
+            _commentsRepository.UpdateComment(comment, id);
             return Ok();
         }
 

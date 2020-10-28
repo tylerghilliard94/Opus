@@ -9,6 +9,7 @@ import { UserProfileContext } from "../providers/UserProfileProvider";
 import Following from "../Following/Following"
 import Likes from "../Likes/Likes"
 import Favorites from "../Favorites/Favorites"
+import CommentList from "../Comments/CommentList"
 
 
 
@@ -43,7 +44,8 @@ export default function PostDetails() {
                     <Row><h2>{artPost.title}</h2></Row>
                     <Row><p>{artPost.description}</p></Row>
                     <Row><Likes setRefresh={setRefresh} /> <Favorites setRefresh={setRefresh} /></Row>
-                    <Row><h3>Comments</h3> <Button>Add New Comment</Button></Row>
+                    <CommentList refresh={refresh} setRefresh={setRefresh} />
+
                 </Col>
 
                 <Col>

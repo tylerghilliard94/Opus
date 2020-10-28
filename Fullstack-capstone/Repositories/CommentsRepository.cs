@@ -17,7 +17,7 @@ namespace Fullstack_capstone.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO UserProfile (UserProfileId, PostId, 
+                    cmd.CommandText = @"INSERT INTO Comments (UserProfileId, PostId, 
                                                                  Content, PostDate)
                                         OUTPUT INSERTED.ID
                                         VALUES (@UserProfileId, @PostId, @Content, @PostDate)";
@@ -33,7 +33,7 @@ namespace Fullstack_capstone.Repositories
             }
         }
 
-        public List<Comment> GetAllComments()
+        public List<Comment> GetAllComments(int id)
         {
             using (var conn = Connection)
             {
@@ -41,15 +41,15 @@ namespace Fullstack_capstone.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SELECT c.Id, c.UserProfileId, c.PostId, c.Content, c.PostDate
+                       SELECT c.Id, c.UserProfileId, c.PostId, c.Content, c.PostDate, up.DisplayName
                          FROM Comments c
-                             
-              
+                         JOIN UserProfile up ON up.Id = c.UserProfileId
+                        WHERE c.PostId = @PostId
                         ORDER BY c.PostDate;
                       
                        ";
 
-
+                    cmd.Parameters.AddWithValue("@PostId", id);
                     List<Comment> comments = new List<Comment>();
                     var reader = cmd.ExecuteReader();
 
@@ -61,8 +61,12 @@ namespace Fullstack_capstone.Repositories
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
                             PostId = DbUtils.GetInt(reader, "PostId"),
 
-                            Content = DbUtils.GetString(reader, "FullName"),
+                            Content = DbUtils.GetString(reader, "Content"),
                             PostDate = DbUtils.GetDateTime(reader, "PostDate"),
+                            UserProfile = new UserProfile()
+                            {
+                                DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                            }
 
 
 
@@ -117,7 +121,7 @@ namespace Fullstack_capstone.Repositories
             }
         }
 
-        public void UpdateComment(Comment comment)
+        public void UpdateComment(Comment comment, int id)
         {
 
             using (var conn = Connection)
@@ -126,23 +130,20 @@ namespace Fullstack_capstone.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        UPDATE Comment
+                        UPDATE Comments
                         SET
                         UserProfileId = @userProfileId,
                         PostId = @postId,
-                        Content = @content,
-                        PostDate = @postDate,
-                       
-                       
+                        Content = @content
                         WHERE Id = @id";
 
                     cmd.Parameters.AddWithValue("@userProfileId", comment.UserProfileId);
                     cmd.Parameters.AddWithValue("@postId", comment.PostId);
                     cmd.Parameters.AddWithValue("@content", comment.Content);
-                    cmd.Parameters.AddWithValue("@postDate", comment.PostDate);
+                    
 
 
-                    cmd.Parameters.AddWithValue("@id", comment.Id);
+                    cmd.Parameters.AddWithValue("@id", id);
 
 
                     cmd.ExecuteNonQuery();
@@ -160,7 +161,7 @@ namespace Fullstack_capstone.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        DELETE FROM Comment
+                        DELETE FROM Comments
                        
                         WHERE Id = @id";
 
