@@ -66,25 +66,29 @@ export function ArtPostProvider(props) {
             fetch(`/api/artpost`, {
                 method: "Post",
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify(artPost)
             }))
     };
 
     const editArtPost = (artPost) => {
+
         return getToken().then((token) =>
             fetch(`/api/artpost`, {
                 method: "PUT",
                 headers: {
 
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify(artPost)
             }))
     };
 
     const deleteArtPost = (id) => {
+
         return getToken().then((token) =>
             fetch(`/api/artpost/delete/${id}`, {
                 method: "PUT",

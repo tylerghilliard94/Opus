@@ -39,7 +39,7 @@ export function CommentProvider(props) {
     };
 
     const saveComment = (comment) => {
-        debugger
+
         return getToken().then((token) =>
             fetch(`/api/comments`, {
                 method: "Post",

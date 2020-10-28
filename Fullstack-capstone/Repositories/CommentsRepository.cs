@@ -45,7 +45,7 @@ namespace Fullstack_capstone.Repositories
                          FROM Comments c
                          JOIN UserProfile up ON up.Id = c.UserProfileId
                         WHERE c.PostId = @PostId
-                        ORDER BY c.PostDate;
+                        ORDER BY c.PostDate DESC;
                       
                        ";
 

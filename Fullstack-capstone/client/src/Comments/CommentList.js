@@ -19,8 +19,11 @@ export default function ClassList(props) {
     const { artPost } = useContext(ArtPostContext)
     const { getAllComments, saveComment, comments } = useContext(CommentContext)
 
-    let [comment, setComment] = useState({ UserProfileId: parseInt(sessionStorage.userProfileId), PostId: artPost.id, Content: "" })
-    const [edit, setEdit] = useState(0);
+    let [comment, setComment] = useState({ UserProfileId: parseInt(sessionStorage.userProfileId), PostId: parseInt(artPost.id), Content: "" })
+    const [edit, setEdit] = useState(-1);
+    const [deleteRefresh, setDeleteRefresh] = useState(-1);
+    const [addRefresh, setAddRefresh] = useState(-1);
+    const [editRefresh, setEditRefresh] = useState(-1);
 
     useEffect(() => {
         if (artPost.id != undefined) {
@@ -29,7 +32,7 @@ export default function ClassList(props) {
             getAllComments(artPost.id);
             comment.PostId = artPost.id;
         }
-    }, [artPost, edit])
+    }, [artPost, deleteRefresh, addRefresh, editRefresh])
 
     const handleChange = (evt) => {
         let stateChange = { ...comment }
@@ -39,13 +42,13 @@ export default function ClassList(props) {
 
     const handleSaveComment = () => {
         saveComment(comment)
-        props.setRefresh(props.refresh + 7)
+        setAddRefresh(addRefresh + 1)
 
         document.querySelector("#Content").value = "";
 
     }
 
-    console.log(comments.length)
+    console.log(edit)
 
     return (
         <>
@@ -55,7 +58,7 @@ export default function ClassList(props) {
             <Button onClick={handleSaveComment}>Add New Comment</Button>
             {comments.length != 0 ? comments.map(artPostComment => (
 
-                <Comment key={artPostComment.id} edit={edit} setEdit={setEdit} comment={artPostComment} setRefresh={props.setRefresh} />
+                <Comment key={artPostComment.id} edit={edit} setEdit={setEdit} setEditRefresh={setEditRefresh} editRefresh={editRefresh} comment={artPostComment} setDeleteRefresh={setDeleteRefresh} deleteRefresh={deleteRefresh} setRefresh={props.setRefresh} refresh={props.refresh} />
             )) : null}
 
         </>

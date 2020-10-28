@@ -19,7 +19,7 @@ import { CommentContext } from "../providers/CommentProvider";
 export default function Comment(props) {
     const { artPost } = useContext(ArtPostContext)
     let [comment, setComment] = useState({ UserProfileId: parseInt(sessionStorage.userProfileId), PostId: artPost.id, Content: "" })
-    const { editComment } = useContext(CommentContext)
+    const { editComment, deleteComment } = useContext(CommentContext)
 
 
 
@@ -31,12 +31,20 @@ export default function Comment(props) {
     }
     const handleOpenEdit = (evt) => {
         props.setEdit(parseInt(evt.target.id))
+
+    }
+
+    const handleDelete = (evt) => {
+
+        deleteComment(evt.target.id)
+        props.setDeleteRefresh(props.deleteRefresh - 1)
     }
 
     const handleCloseEdit = (evt) => {
-        debugger
+
         editComment(comment, props.edit)
-        props.setEdit(parseInt(evt.target.id))
+        props.setEdit(0)
+        props.setEditRefresh(props.editRefresh - 1)
     }
 
 
@@ -59,7 +67,7 @@ export default function Comment(props) {
 
                     <CardBody >{props.comment.content}</CardBody>
 
-                    {props.comment.userProfileId == sessionStorage.userProfileId ? <div><Button id={props.comment.id} onClick={handleOpenEdit}>Edit</Button> <Button>Delete</Button></div> : null}
+                    {props.comment.userProfileId == sessionStorage.userProfileId ? <div><Button id={props.comment.id} onClick={handleOpenEdit}>Edit</Button> <Button id={props.comment.id} onClick={handleDelete}>Delete</Button></div> : null}
                 </Card>
 
 
