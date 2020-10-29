@@ -191,8 +191,8 @@ namespace Fullstack_capstone.Repositories
                               LEFT JOIN UserProfile u ON ap.UserProfileId = u.Id
                               LEFT JOIN Categories c ON ap.CategoryId = c.Id
                               LEFT JOIN ArtType at ON ap.ArtTypeId = at.Id
-                        WHERE ap.UserProfileId = @UserProfileId AND isDeleted = 0
-                        ORDER BY ap.PostDate;
+                        WHERE ap.UserProfileId = @UserProfileId AND ap.isDeleted = 0
+                        ORDER BY ap.PostDate DESC;
                       
                        ";
 
@@ -460,7 +460,7 @@ namespace Fullstack_capstone.Repositories
 
                     if(latestSwitch == true)
                     {
-                        cmd.CommandText += "ORDER BY ap.PostDate";
+                        cmd.CommandText += "ORDER BY ap.PostDate DESC";
                     }
                     else if(trendingSwitch == true)
                     {
@@ -473,7 +473,7 @@ namespace Fullstack_capstone.Repositories
 
                         }
 
-                        cmd.CommandText += "ORDER BY ap.PostDate;";
+                        cmd.CommandText += "ORDER BY ap.PostDate DESC;";
                     }else if(favorites.Count != 0)
                     {
                         foreach (Favorite favorite in favorites)
@@ -489,7 +489,7 @@ namespace Fullstack_capstone.Repositories
                             
 
                         }
-                        cmd.CommandText += "ORDER BY ap.PostDate;";
+                        cmd.CommandText += "ORDER BY ap.PostDate DESC;";
                     }
                     
 

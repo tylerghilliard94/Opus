@@ -7,6 +7,8 @@ import Hello from "../Hello";
 import Explore from "../Explore/Explore";
 import ArtPostDetails from "../ArtPost/ArtPostDetails"
 import UserProfile from "../UserProfile/UserProfile"
+import UserProfileEdit from "../UserProfile/UserProfileEdit";
+import ArtPostAdd from "../ArtPost/ArtPostAdd"
 
 
 export default function ApplicationViews(props) {
@@ -28,6 +30,16 @@ export default function ApplicationViews(props) {
         </Route>
         <Route path="/profile/:id" exact>
           {isLoggedIn ? <UserProfile /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/profile/user/edit" exact>
+          {isLoggedIn ? <UserProfileEdit /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/profile/user/edit" exact>
+          {isLoggedIn ? <UserProfileEdit /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/profile/post/add" exact>
+          {isLoggedIn ? <ArtPostAdd /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/login">

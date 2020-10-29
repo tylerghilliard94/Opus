@@ -187,11 +187,72 @@ namespace Fullstack_capstone.Repositories
                 }
             }
         }
-      
 
 
-       
-        
+        public void UpdateUserProfile(UserProfile userProfile)
+        {
+
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE UserProfile
+                        SET
+                        FullName = @fullName,
+                        DisplayName = @displayName,
+                        Description = @description,
+                        Image = @image,
+                      
+                       
+                        
+                        PrimaryFocusId = @primaryFocusId
+                        WHERE Id = @id";
+
+                    cmd.Parameters.AddWithValue("@fullName", userProfile.FullName);
+                    cmd.Parameters.AddWithValue("@displayName", userProfile.DisplayName);
+                    cmd.Parameters.AddWithValue("@description", userProfile.Description);
+                    cmd.Parameters.AddWithValue("@image", userProfile.Image);
+
+
+                    
+                    cmd.Parameters.AddWithValue("@primaryFocusId", userProfile.PrimaryFocusId);
+                    cmd.Parameters.AddWithValue("@id", userProfile.Id);
+
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+        }
+
+        public void DeleteUserProfile(int id)
+        {
+
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE UserProfile
+                        SET
+                        IsDeleted = @isDeleted
+                        WHERE Id = @id";
+
+                    cmd.Parameters.AddWithValue("@isDeleted", 1);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+
+        }
+
+
 
 
 

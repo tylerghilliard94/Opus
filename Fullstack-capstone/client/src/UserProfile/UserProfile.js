@@ -65,10 +65,10 @@ export default function PostDetails() {
 
                 </Col>
                 <Col>
-                    {singleUserProfile.id == sessionStorage.userProfileId ? <Button>Edit</Button> : null}
+                    {singleUserProfile.id == sessionStorage.userProfileId ? <NavLink to={"user/edit"}><Button>Editttttt</Button></NavLink> : null}
                     <Row><p>{singleUserProfile.description}</p></Row>
                     {singleUserProfile.id != sessionStorage.userProfileId ? <ProfileFollowing setRefresh={setRefresh} refresh={refresh} /> : null}
-
+                    {singleUserProfile.id == sessionStorage.userProfileId ? <NavLink to={"post/add"}><Button>Add Art Post</Button></NavLink> : null}
                 </Col>
 
 
