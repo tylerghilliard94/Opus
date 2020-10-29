@@ -191,7 +191,7 @@ namespace Fullstack_capstone.Repositories
                               LEFT JOIN UserProfile u ON ap.UserProfileId = u.Id
                               LEFT JOIN Categories c ON ap.CategoryId = c.Id
                               LEFT JOIN ArtType at ON ap.ArtTypeId = at.Id
-                        WHERE ap.UserProfileId = @UserProfileId AND WHERE isDeleted = 0
+                        WHERE ap.UserProfileId = @UserProfileId AND isDeleted = 0
                         ORDER BY ap.PostDate;
                       
                        ";

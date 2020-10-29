@@ -31,6 +31,17 @@ export function ArtPostProvider(props) {
                 .then(setArtPosts))
     };
 
+    const getAllArtPostsByUserId = (id) => {
+        return getToken().then((token) =>
+            fetch(`/api/artpost/user/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(resp => resp.json())
+                .then(setArtPosts))
+    };
+
     const getArtPost = (id) => {
 
         return getToken().then((token) =>
@@ -123,7 +134,7 @@ export function ArtPostProvider(props) {
 
 
     return (
-        <ArtPostContext.Provider value={{ getToken, artPost, artPosts, getAllArtPosts, getArtPost, searchArtPosts, saveArtPost, editArtPost, deleteArtPost, addLike, removeLike }}>
+        <ArtPostContext.Provider value={{ getToken, artPost, artPosts, getAllArtPosts, getArtPost, searchArtPosts, saveArtPost, editArtPost, deleteArtPost, addLike, removeLike, getAllArtPostsByUserId }}>
             {props.children}
         </ArtPostContext.Provider>
     );

@@ -20,15 +20,15 @@ export default function ArtPostList() {
 
 
 
-
+    console.log(artPosts)
 
 
     return (
         <>
             <Row>
-                {artPosts.map(post => {
+                {artPosts.length != 0 ? artPosts.map(post => {
                     return <ArtPost post={post} />
-                })}
+                }) : null}
             </Row>
         </>
 

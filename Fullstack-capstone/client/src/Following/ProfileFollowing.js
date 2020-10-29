@@ -17,7 +17,7 @@ import { FollowingContext } from "../providers/FollowingProvider";
 
 
 
-export default function Following(props) {
+export default function ProfileFollowing(props) {
 
     const { singleUserProfile } = useContext(UserProfileContext)
     const { artPost } = useContext(ArtPostContext)
@@ -27,11 +27,11 @@ export default function Following(props) {
 
     useEffect(() => {
 
-        if (artPost.userProfileId == singleUserProfile.id && artPost.id != undefined) {
+        if (singleUserProfile.id != undefined) {
             getFollow(sessionStorage.userProfileId, singleUserProfile.id)
         }
         localFollow.SubscribedToId = singleUserProfile.id
-    }, [singleUserProfile])
+    }, [singleUserProfile, props.refresh])
 
     const handleFollow = () => {
         saveFollow(localFollow)

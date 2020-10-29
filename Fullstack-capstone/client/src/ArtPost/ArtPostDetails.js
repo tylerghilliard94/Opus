@@ -177,7 +177,7 @@ export default function PostDetails() {
                         <Row><h2>{singleUserProfile.displayName}</h2></Row>
                         <Row><img class="userProfileImg" src={singleUserProfile.image}></img></Row>
                         <Row><p>{singleUserProfile.description}</p></Row>
-                        <Row><Following setRefresh={setRefresh} /> <Button>Details</Button></Row>
+                        <Row><Following setRefresh={setRefresh} /> <NavLink to={`/profile/${singleUserProfile.id}`}><Button>Details</Button></NavLink></Row>
 
                     </Col>
                 </Row>
@@ -204,7 +204,7 @@ export default function PostDetails() {
                     <Row><h2>{singleUserProfile.displayName}</h2></Row>
                     <Row><img class="userProfileImg" src={singleUserProfile.image}></img></Row>
                     <Row><p>{singleUserProfile.description}</p></Row>
-                    <Row><Following setRefresh={setRefresh} /> <Button>Details</Button></Row>
+                    <Row><Following setRefresh={setRefresh} /> <NavLink to={`/profile/${singleUserProfile.id}`}><Button>Details</Button></NavLink></Row>
 
                 </Col>
             </Row>
