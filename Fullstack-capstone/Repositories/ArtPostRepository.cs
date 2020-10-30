@@ -470,36 +470,45 @@ namespace Fullstack_capstone.Repositories
                         cmd.CommandText += "ORDER BY ap.Likes DESC";
                     }else if(follows.Count != 0)
                     {
+                        cmd.CommandText += $"AND ap.UserProfileId in(";
                         foreach (Following follow in follows)
                         {
-                            if(follow == follows[0])
-                            {
-                                cmd.CommandText += $"AND ap.UserProfileId = {follow.SubscribedToId}";
-                            }
-                            else
-                            {
-                                cmd.CommandText += $"OR ap.UserProfileId = {follow.SubscribedToId}";
-                            }
+                          
                            
+                              cmd.CommandText += $"{follow.SubscribedToId},";
+                            
+
+                        if (follow == follows[follows.Count - 1])
+                        {
+                            cmd.CommandText += $"{follow.SubscribedToId}";
+                            }
+
 
                         }
+                        cmd.CommandText += $")";
 
                         cmd.CommandText += "ORDER BY ap.PostDate DESC;";
                     }else if(favorites.Count != 0)
                     {
+                        cmd.CommandText += $"AND ap.Id in(";
                         foreach (Favorite favorite in favorites)
                         {
-                            if(favorite == favorites[0])
+
+
+                          
+                                cmd.CommandText += $"{favorite.PostId},";
+                            if(favorite == favorites[favorites.Count - 1])
                             {
-                                cmd.CommandText += $"AND ap.Id = {favorite.PostId}";
-                            }
-                            else
-                            {
-                                cmd.CommandText += $"OR ap.Id = {favorite.PostId}";
+                                cmd.CommandText += $"{favorite.PostId}";
                             }
                             
+                                
+                            
+
+                        
 
                         }
+                        cmd.CommandText += $")";
                         cmd.CommandText += "ORDER BY ap.PostDate DESC;";
                     }
                     

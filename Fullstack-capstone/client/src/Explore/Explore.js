@@ -40,7 +40,7 @@ export default function Explore() {
     }, [category, artType, latestSwitch, trendingSwitch, followingSwitch, favoriteSwitch])
 
     useEffect(() => {
-        sleep(900).then(() => setIsLoading(false))
+        sleep(600).then(() => setIsLoading(false))
     }, [artPosts, following])
     const handleLatest = () => {
         setFavoriteSwitch(false)

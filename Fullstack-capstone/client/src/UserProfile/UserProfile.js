@@ -74,6 +74,7 @@ export default function PostDetails() {
                 <Col>
                     <Row><h2>{singleUserProfile.displayName}</h2></Row>
                     <Row><h2>{singleUserProfile.fullName}</h2></Row>
+                    <Row><h2>{singleUserProfile.primaryFocus.name} Focused</h2></Row>
 
 
 

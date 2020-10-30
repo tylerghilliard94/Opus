@@ -5,6 +5,7 @@ import {
     CarouselControl,
     CarouselIndicators,
     CarouselCaption,
+    Spinner
 
 } from 'reactstrap';
 import { ArtPostContext } from '../providers/ArtPostProvider';
@@ -56,6 +57,7 @@ const HomeCarousel = (props) => {
             getAllRecommendedArtPosts(sessionStorage.userProfileId)
 
         }
+        setIsLoading(!isLoading)
     }, [following])
 
     const next = () => {
@@ -89,7 +91,9 @@ const HomeCarousel = (props) => {
         );
     });
     if (isLoading) {
-        return null
+        return <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+        </Spinner>
     }
     return (
         <Carousel
