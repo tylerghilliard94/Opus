@@ -4,6 +4,7 @@ using Fullstack_capstone.Models;
 using Fullstack_capstone.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace Fullstack_capstone.Controllers
 {
@@ -46,6 +47,74 @@ namespace Fullstack_capstone.Controllers
         public IActionResult GetUserProfileById(int id)
         {
             return Ok(_artPostRepository.GetArtPostById(id));
+        }
+
+        [HttpGet("recommended/{id}")]
+        public IActionResult GetRecommendedPosts(int id)
+        {
+            List<ArtPost> recommendedPosts = new List<ArtPost>();
+            List<ArtPost> recommendedPostsFiltered = new List<ArtPost>();
+            List<Following> userFollows = new List<Following>();
+            List<Following> follows = _followingRepository.GetAllFollows(id);
+            foreach (Following follow in follows)
+            {
+                 userFollows = _followingRepository.GetAllFollows(follow.SubscribedToId);
+                foreach (Following userFollow in userFollows)
+                {
+                    if (userFollow.SubscribedToId != id)
+                    {
+
+
+                        List<ArtPost> userPosts = _artPostRepository.GetAllArtPostsByUser(userFollow.SubscribedToId);
+
+                        foreach (ArtPost post in userPosts)
+                        {
+                            recommendedPosts.Add(post);
+                        }
+                    }
+                }
+            }
+            int numTest = -1;
+            int numTest2 = -2;
+            int numTest3 = -3;
+            int numTest4 = -4;
+            var random = new Random();
+            ArtPost numPost = new ArtPost();
+            for (int i = 0; i < 5; i++)
+            {
+                double randomNumber = (random.NextDouble() * recommendedPosts.Count);
+                double roundedNum = Math.Floor(randomNumber);
+                int num = (int)roundedNum;
+                if (num == numTest || num == numTest2 || num == numTest3 || num == numTest4)
+                {
+                    i--;
+                }
+                else
+                {
+
+
+                    try
+                    {
+                      numPost = recommendedPosts[num];
+                    }
+                    catch
+                    {
+                        i--;
+                        break;
+                    }
+                    numTest4 = numTest3;
+                    numTest3 = numTest2;
+                    numTest2 = numTest;
+                    numTest = num;
+
+                    recommendedPostsFiltered.Add(numPost);
+                }
+              
+            }
+          
+                return Ok(recommendedPostsFiltered);
+            
+            
         }
 
         [HttpGet("user/{id}")]

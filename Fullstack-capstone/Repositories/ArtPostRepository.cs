@@ -55,8 +55,11 @@ namespace Fullstack_capstone.Repositories
                               LEFT JOIN UserProfile u ON ap.UserProfileId = u.Id
                               LEFT JOIN Categories c ON ap.CategoryId = c.Id
                               LEFT JOIN ArtType at ON ap.ArtTypeId = at.Id
-                        WHERE isDeleted = 0
-                        ORDER BY ap.PostDate;
+                        WHERE ap.isDeleted = 0
+                      
+                        ORDER BY ap.PostDate DESC
+                          OFFSET 0 ROWS Fetch next 10 rows only
+                       ;
                       
                        ";
 

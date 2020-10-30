@@ -12,50 +12,52 @@ import { UserProfileContext } from "../providers/UserProfileProvider";
 import { ArtPostContext } from "../providers/ArtPostProvider";
 import { CommentContext } from "../providers/CommentProvider";
 import Comment from "./Comment"
+import CommentAdd from "./CommentAdd"
 
 
-export default function ClassList(props) {
+export default function CommentList(props) {
     const { singleUserProfile } = useContext(UserProfileContext)
     const { artPost } = useContext(ArtPostContext)
     const { getAllComments, saveComment, comments } = useContext(CommentContext)
 
-    let [comment, setComment] = useState({ UserProfileId: parseInt(sessionStorage.userProfileId), PostId: parseInt(artPost.id), Content: "" })
+
     const [edit, setEdit] = useState(-1);
     const [deleteRefresh, setDeleteRefresh] = useState(-1);
     const [addRefresh, setAddRefresh] = useState(-1);
     const [editRefresh, setEditRefresh] = useState(-1);
+    const [isLoading, setIsLoading] = useState(false)
 
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
     useEffect(() => {
+
+
         if (artPost.id != undefined) {
 
 
-            getAllComments(artPost.id);
-            comment.PostId = artPost.id;
+
+            sleep(300).then(() => getAllComments(artPost.id));
+            sleep(550).then(() => setIsLoading(false))
         }
+
+        setIsLoading(true)
     }, [artPost, deleteRefresh, addRefresh, editRefresh])
 
-    const handleChange = (evt) => {
-        let stateChange = { ...comment }
-        stateChange[evt.target.id] = evt.target.value
-        setComment(stateChange)
+
+
+
+
+
+
+    if (isLoading) {
+        return null
     }
-
-    const handleSaveComment = () => {
-        saveComment(comment)
-        setAddRefresh(addRefresh + 1)
-
-        document.querySelector("#Content").value = "";
-
-    }
-
-    console.log(edit)
-
     return (
         <>
 
-            <Row><h3>Comments</h3> </Row>
-            <input id="Content" onChange={handleChange}></input>
-            <Button onClick={handleSaveComment}>Add New Comment</Button>
+            <CommentAdd setAddRefresh={setAddRefresh} addRefresh={addRefresh} />
             {comments.length != 0 ? comments.map(artPostComment => (
 
                 <Comment key={artPostComment.id} edit={edit} setEdit={setEdit} setEditRefresh={setEditRefresh} editRefresh={editRefresh} comment={artPostComment} setDeleteRefresh={setDeleteRefresh} deleteRefresh={deleteRefresh} setRefresh={props.setRefresh} refresh={props.refresh} />

@@ -109,7 +109,7 @@ export function UserProfileProvider(props) {
   };
 
   const editUserProfile = (user) => {
-    debugger
+
     return getToken().then((token) =>
       fetch(`${apiUrl}`, {
         method: "PUT",
@@ -118,7 +118,9 @@ export function UserProfileProvider(props) {
           Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(user)
-      }));;
+      }).then(() =>
+        sessionStorage.setItem("userProfile", JSON.stringify(user)
+        )));
   };
 
   const deleteUserProfile = (userId) => {

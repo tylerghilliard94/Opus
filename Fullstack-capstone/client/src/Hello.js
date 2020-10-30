@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserProfileContext } from "./providers/UserProfileProvider"
 import Home from "./Home/Home";
 
@@ -8,7 +8,15 @@ import Home from "./Home/Home";
 
 
 export default function Hello() {
-  const { activeUser } = useContext(UserProfileContext);
+
+  const { activeUser } = useState(UserProfileContext)
+  let [localActiveUser, setLocalActiveUser] = useState(activeUser)
+
+
+
+  let user = JSON.parse(sessionStorage.userProfile)
+  localActiveUser = user
+
 
 
 
@@ -28,7 +36,7 @@ export default function Hello() {
           top: "50%",
           marginTop: "-0.5rem",
           textAlign: "center",
-        }}>Hello, Good Morning {activeUser.displayName}
+        }}>Hello, Good Morning {localActiveUser.DisplayName != undefined ? localActiveUser.DisplayName : localActiveUser.displayName}
 
         </div>
         <Home />
@@ -46,7 +54,7 @@ export default function Hello() {
           top: "50%",
           marginTop: "-0.5rem",
           textAlign: "center",
-        }}>Hello, Good Afternoon {activeUser.displayName}
+        }}>Hello, Good Afternoon {localActiveUser.DisplayName != undefined ? localActiveUser.DisplayName : localActiveUser.displayName}
 
 
 
@@ -65,7 +73,7 @@ export default function Hello() {
           top: "50%",
           marginTop: "-0.5rem",
           textAlign: "center",
-        }}>Hello, Good Evening {activeUser.displayName}
+        }}>Hello, Good Evening {localActiveUser.DisplayName != undefined ? localActiveUser.DisplayName : localActiveUser.displayName}
 
 
 

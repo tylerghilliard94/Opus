@@ -23,8 +23,10 @@ export default function Explore() {
     const [favoriteSwitch, setFavoriteSwitch] = useState(false)
     const [artType, setArtType] = useState(0);
     const [category, setCategory] = useState(0);
-
-
+    const [isLoading, setIsLoading] = useState(false)
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
     const search = () => {
 
         searchArtPosts(sessionStorage.userProfileId, category, artType, latestSwitch, trendingSwitch, followingSwitch, favoriteSwitch)
@@ -34,8 +36,12 @@ export default function Explore() {
         getFollowing(sessionStorage.userProfileId)
         getFavorites(sessionStorage.userProfileId)
         search()
+        setIsLoading(true)
     }, [category, artType, latestSwitch, trendingSwitch, followingSwitch, favoriteSwitch])
 
+    useEffect(() => {
+        sleep(400).then(() => setIsLoading(false))
+    }, [artPosts, following])
     const handleLatest = () => {
         setFavoriteSwitch(false)
         setLatestSwitch(true)
@@ -50,7 +56,7 @@ export default function Explore() {
         setFollowingSwitch(false)
 
     }
-    console.log(favorites)
+
     const handleFollowing = () => {
         setFavoriteSwitch(false)
         setFollowingSwitch(true)
@@ -103,8 +109,8 @@ export default function Explore() {
                                 Favorites
             </Button>}
                     </Row>
+                    {isLoading ? null : <ArtPostList />}
 
-                    <ArtPostList />
 
                 </Col>
             </Row>

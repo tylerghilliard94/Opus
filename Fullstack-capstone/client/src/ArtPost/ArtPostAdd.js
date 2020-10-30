@@ -36,7 +36,7 @@ export default function ArtPostAdd() {
 
     const { id } = useParams();
     useEffect(() => {
-        debugger
+
         getAllCategories()
 
 
@@ -50,7 +50,7 @@ export default function ArtPostAdd() {
         setLocalArtPost(stateChange)
     }
     const handleSave = (evt) => {
-        debugger
+
         localArtPost.CategoryId = parseInt(localArtPost.CategoryId)
         localArtPost.ArtTypeId = parseInt(localArtPost.ArtTypeId)
         saveArtPost(localArtPost)

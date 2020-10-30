@@ -29,8 +29,11 @@ export default function PostDetails() {
 
 
     const [refresh, setRefresh] = useState(0);
+    const [isLoading, setIsLoading] = useState(false)
 
-
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
 
 
@@ -40,7 +43,7 @@ export default function PostDetails() {
         if (refresh != -5000) {
 
 
-            getArtPost(id)
+            sleep(300).then(() => getArtPost(id))
 
             getAllCategories()
         }
@@ -57,8 +60,9 @@ export default function PostDetails() {
             localArtPost.CategoryId = artPost.categoryId
             localArtPost.ArtTypeId = artPost.artTypeId
         }
+        setIsLoading(!isLoading)
 
-    }, [artPost])
+    }, [singleUserProfile])
     const handleChange = (evt) => {
         let stateChange = { ...localArtPost }
         stateChange[evt.target.id] = evt.target.value
@@ -98,11 +102,15 @@ export default function PostDetails() {
     const showWidget = (event) => {
         let widget = window.cloudinary.createUploadWidget({
             cloudName: "dgllrw1m3",
-            uploadPreset: "kxr8ogeo"
+            uploadPreset: "kxr8ogeo",
+
         },
             (error, result) => { checkUploadResult(result) })
 
         widget.open()
+    }
+    if (isLoading) {
+        return null
     }
     if (postEdit == 1) {
         return (

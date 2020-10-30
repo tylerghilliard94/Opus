@@ -18,6 +18,7 @@ export function CommentProvider(props) {
     const { getToken } = useContext(UserProfileContext);
 
     const getAllComments = (id) => {
+
         return getToken().then((token) =>
             fetch(`/api/comments/all/${id}`, {
                 method: "GET",
