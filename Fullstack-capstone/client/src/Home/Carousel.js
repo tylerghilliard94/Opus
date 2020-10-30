@@ -48,12 +48,13 @@ const HomeCarousel = (props) => {
 
 
         }
-        setIsLoading(!isLoading)
+
     }, [artPosts])
 
     useEffect(() => {
         if (following.length != 0) {
             getAllRecommendedArtPosts(sessionStorage.userProfileId)
+
         }
     }, [following])
 

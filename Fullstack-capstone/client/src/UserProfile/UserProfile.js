@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { NavLink, useHistory, useParams } from "react-router-dom";
 
-import { Button, Row, Col, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Row, Col, Form, FormGroup, Label, Input, Spinner } from "reactstrap";
 import { ArtPostContext } from "../providers/ArtPostProvider";
 import { LikeContext, LikeProvider } from "../providers/LikeProvider";
 import { UserProfileContext } from "../providers/UserProfileProvider";
@@ -59,7 +59,9 @@ export default function PostDetails() {
     }, [singleUserProfile])
 
     if (isLoading) {
-        return null
+        return <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+        </Spinner>
     }
     return (
         <>

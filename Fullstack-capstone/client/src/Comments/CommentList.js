@@ -39,10 +39,10 @@ export default function CommentList(props) {
 
 
             sleep(300).then(() => getAllComments(artPost.id));
-            sleep(550).then(() => setIsLoading(false))
+
         }
 
-        setIsLoading(true)
+
     }, [artPost, deleteRefresh, addRefresh, editRefresh])
 
 
@@ -51,9 +51,6 @@ export default function CommentList(props) {
 
 
 
-    if (isLoading) {
-        return null
-    }
     return (
         <>
 

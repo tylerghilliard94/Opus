@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { NavLink } from "react-router-dom";
 
-import { Button, Row, Col } from "reactstrap";
+import { Button, Row, Col, Spinner } from "reactstrap";
 import { ArtPostContext } from "../providers/ArtPostProvider";
 import ArtPostList from "../ArtPost/ArtPostList"
 import CategoryList from "../Categories/CategoryList"
@@ -40,7 +40,7 @@ export default function Explore() {
     }, [category, artType, latestSwitch, trendingSwitch, followingSwitch, favoriteSwitch])
 
     useEffect(() => {
-        sleep(400).then(() => setIsLoading(false))
+        sleep(900).then(() => setIsLoading(false))
     }, [artPosts, following])
     const handleLatest = () => {
         setFavoriteSwitch(false)
@@ -109,7 +109,9 @@ export default function Explore() {
                                 Favorites
             </Button>}
                     </Row>
-                    {isLoading ? null : <ArtPostList />}
+                    {isLoading ? <Spinner animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner> : <ArtPostList />}
 
 
                 </Col>

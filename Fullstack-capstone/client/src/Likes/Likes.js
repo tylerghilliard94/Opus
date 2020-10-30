@@ -26,7 +26,7 @@ export default function Favorites(props) {
 
 
     const [localLike, setLocalLike] = useState({ UserProfileId: parseInt(sessionStorage.userProfileId), PostId: artPost.id })
-
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
 
@@ -35,8 +35,9 @@ export default function Favorites(props) {
         }
 
         localLike.PostId = artPost.id
+
     }, [singleUserProfile])
-    console.log(like)
+
     const handleLike = (evt) => {
 
         addLike(artPost.id, artPost.likes)
@@ -49,7 +50,6 @@ export default function Favorites(props) {
         deleteLike(like.id)
         props.setRefresh(1)
     }
-
 
 
     return (

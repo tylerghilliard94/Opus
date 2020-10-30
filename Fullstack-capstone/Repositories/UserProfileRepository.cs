@@ -22,7 +22,7 @@ namespace Fullstack_capstone.Repositories
                                pf.Name AS PrimaryFocus
                           FROM UserProfile up
                                LEFT JOIN PrimaryFocus pf on up.PrimaryFocusId = pf.Id
-                         WHERE FirebaseUserId = @FirebaseuserId ";
+                         WHERE FirebaseUserId = @FirebaseuserId AND up.IsDeleted = 0";
 
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
 

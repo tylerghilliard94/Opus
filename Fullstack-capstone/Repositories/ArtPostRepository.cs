@@ -472,7 +472,15 @@ namespace Fullstack_capstone.Repositories
                     {
                         foreach (Following follow in follows)
                         {
-                            cmd.CommandText += $"AND ap.UserProfileId = {follow.SubscribedToId}";
+                            if(follow == follows[0])
+                            {
+                                cmd.CommandText += $"AND ap.UserProfileId = {follow.SubscribedToId}";
+                            }
+                            else
+                            {
+                                cmd.CommandText += $"OR ap.UserProfileId = {follow.SubscribedToId}";
+                            }
+                           
 
                         }
 

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { NavLink, useHistory, useParams } from "react-router-dom";
 
-import { Button, Row, Col, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Row, Col, Form, FormGroup, Label, Input, Spinner } from "reactstrap";
 import { ArtPostContext } from "../providers/ArtPostProvider";
 import { LikeContext, LikeProvider } from "../providers/LikeProvider";
 import { UserProfileContext } from "../providers/UserProfileProvider";
@@ -47,10 +47,18 @@ export default function PostDetails() {
 
             getAllCategories()
         }
+        setIsLoading(true)
+        if (refresh != 0) {
+            setIsLoading(false)
+        }
+
+
+
 
     }, [refresh])
 
     useEffect(() => {
+
 
         if (artPost.id != undefined) {
             localArtPost.Id = artPost.id
@@ -59,10 +67,23 @@ export default function PostDetails() {
             localArtPost.Image = artPost.image
             localArtPost.CategoryId = artPost.categoryId
             localArtPost.ArtTypeId = artPost.artTypeId
+
         }
-        setIsLoading(!isLoading)
+
+
+
+
+
+
 
     }, [singleUserProfile])
+    useEffect(() => {
+        setIsLoading(false)
+    }, [singleUserProfile])
+    useEffect(() => {
+        setIsLoading(true)
+    }, [])
+
     const handleChange = (evt) => {
         let stateChange = { ...localArtPost }
         stateChange[evt.target.id] = evt.target.value
@@ -76,6 +97,8 @@ export default function PostDetails() {
 
 
     const handleCloseEdit = (evt) => {
+        debugger
+        localArtPost.ArtTypeId = parseInt(localArtPost.ArtTypeId)
         localArtPost.CategoryId = parseInt(localArtPost.CategoryId)
         editArtPost(localArtPost)
         setRefresh(0)
@@ -110,7 +133,9 @@ export default function PostDetails() {
         widget.open()
     }
     if (isLoading) {
-        return null
+        return <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+        </Spinner>
     }
     if (postEdit == 1) {
         return (
