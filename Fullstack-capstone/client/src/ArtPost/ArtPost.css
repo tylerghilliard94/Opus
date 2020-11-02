@@ -1,0 +1,207 @@
+.view {
+    width: 200px;
+    height: 200px;
+   
+    float: left;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    box-shadow: 1px 1px 2px #343a40;
+    cursor: default;
+    background: #343a40 no-repeat center center
+}
+.view .mask, .view .content {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0
+}
+.view img {
+    display: block;
+    position: relative
+}
+.view h2 {
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    font-size: 17px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    margin: 20px 0 0 0
+}
+.view p {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 12px;
+    position: relative;
+    color: #fff;
+    padding: 10px 20px 20px;
+    text-align: center
+}
+.view a.info {
+    display: inline-block;
+    text-decoration: none;
+    padding: 7px 14px;
+    background: #000;
+    color: #fff;
+    text-transform: uppercase;
+    box-shadow: 0 0 1px #000
+}
+.view a.info:hover {
+    box-shadow: 0 0 5px #000
+}
+.view-first img { 
+    transition: all 0.2s linear;
+}
+.view-first .mask {
+    opacity: 0;
+    background-color: #343a406e; 
+    transition: all 0.4s ease-in-out;
+}
+.view-first h2 {
+    transform: translateY(-100px);
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+.view-first p { 
+    transform: translateY(100px);
+    opacity: 0;
+	transition: all 0.2s linear;
+}
+.view-first a.info{
+    opacity: 0;
+	transition: all 0.2s ease-in-out;
+}
+.view-first:hover img { 
+	transform: scale(1.1);
+} 
+.view-first:hover .mask { 
+	opacity: 1;
+}
+.view-first:hover h2,
+.view-first:hover p,
+.view-first:hover a.info {
+    opacity: 1;
+    transform: translateY(0px);
+}
+.view-first:hover p {
+    transition-delay: 0.1s;
+}
+.view-first:hover a.info {
+    transition-delay: 0.2s;
+}
+
+.ExploreContainer{
+    background-color: #1d1d1d;
+    min-Height: 60em !important;
+}
+
+.ExploreRow{
+    padding-top: 2%;
+    min-height: 65.2em;
+    
+}
+
+
+
+.Category .SelectedButton  {
+    background-color: #a4ffbb !important;
+    color: #343a40 !important;
+    font-weight: bold !important;
+    width: 57%;
+    margin-bottom: 1.5%;
+    margin-top: 1.5%;
+    margin-left: 15%;
+    
+}
+.ArtType .SelectedButton  {
+    background-color: #a4ffbb !important;
+    color: #343a40 !important;
+    font-weight: bold !important;
+    width:20%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+.Filter .SelectedButton {
+    background-color: #a4ffbb !important;
+    color: #343a40 !important;
+    font-weight: bold !important;
+    width: 10%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    
+}
+
+.Category .NonSelectedButton  {
+    width: 57%;
+    margin-bottom: 1.5%;
+    margin-top: 1.5%;
+    margin-left: 15%;
+
+    
+}
+.ArtType .NonSelectedButton  {
+    width:20%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+   
+}
+.Filter .NonSelectedButton {
+width: 10%;
+margin-left: 2.5%;
+margin-right: 2.5%;
+    
+}
+
+.Filter{
+    padding-left: 30%;
+    margin-bottom: 2%;
+}
+
+.ArtType{
+    padding-left: 11%;
+    margin-bottom: 5%;
+}
+
+
+.DetailsContainer{
+    background-color: #1d1d1d !important;
+    color: #ececec;
+
+}
+
+.postDetailsImg{
+    
+}
+
+.PostDetails{
+    margin-left: 15%;
+    margin-top: 2%
+}
+
+.ArtistDetails{
+    margin-left: 20%;
+    margin-top: 4%;
+    background-color: #343a40;
+    height: 60em;
+    border-radius: 2% !important;
+    padding-right: 2%;
+    border-color: cornsilk;
+   
+}
+
+.PostTitle{
+    text-align: center;
+    margin-left: 18%;
+    margin-top: 2%;
+}
+
+.PostDesc{
+    text-align: center;
+    margin-left: 18%;
+    margin-top: 2%;
+}
+

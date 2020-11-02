@@ -10,6 +10,17 @@
     margin-bottom: 10em;
     
   }
+  .RegistrationCard{
+    width: 50%;
+   
+    margin-left: 30em;
+    margin-top: 8em;
+    background-color: #343a40!important;
+    color: #ececec !important;
+    margin-bottom: 5em;
+    
+  }
+
 
   .LoginContainer{
     display: flex;
@@ -43,7 +54,80 @@
   .LoginPassword{
     margin-left: 4em;
   }
+  .RegisterFullName{
+      width: 70% !important;
+      margin-left: 2.1em;
+      background-color: #6b6d75 !important;
+      border-color: #6b6d75 !important;
+      color: #ececec !important;
+  }
 
+  .RegisterDisplayName{
+    width: 70% !important;
+    margin-left: 2.1em;
+    background-color: #6b6d75 !important;
+    border-color: #6b6d75 !important;
+    color: #ececec !important;
+}
+
+.RegisterPrimaryFocus{
+    margin-left: 2.1em;
+    background-color: #6b6d75 !important;
+    border-color: #6b6d75 !important;
+    color: #ececec !important;
+
+}
+
+.RegisterDescription{
+    width: 70% !important;
+    margin-left: 2.1em;
+    background-color: #6b6d75 !important;
+    border-color: #6b6d75 !important;
+    color: #ececec !important;
+}
+
+.RegisterConfirmPassword{
+    width: 70% !important;
+    margin-left: .7em;
+    background-color: #6b6d75 !important;
+    border-color: #6b6d75 !important;
+    color: #ececec !important;
+}
+
+.RegisterPrimaryFocus{
+    margin-left: 1.8em;
+}
+
+.FullNameTitle{
+margin-left: 3.58em;
+}
+
+.DisplayNameTitle{
+    margin-left: 2em;
+
+}
+.DescriptionTitle{
+    margin-left: 3em;
+}
+
+.UploadPictureButton{
+    margin-left: 10.1em !important;
+    background-color: #a4ffbb !important;
+    color: #343a40 !important;
+}
+.RegisterConfirmButton{
+margin-left: 50em;
+background-color: #a4ffbb !important;
+color: #343a40 !important;
+}
+
+.ConfirmPasswordTitle{
+margin-left: 1.5em;
+}
+
+.PrimaryFocusTitle{
+    margin-left: 1.2em;
+}
   #email {
       width: 70%;
       margin-left: 2.1em;
@@ -61,13 +145,13 @@
   }
 
   .LoginButton{
-      margin-left: 28em;
+      margin-left: 27.5em;
       background-color: #a4ffbb !important;
       color: #343a40 !important;
   }
 
   .RegisterText{
-      margin-left:24.4em;
+      margin-left:23.9em;
       margin-bottom: 1em !important;
       padding-bottom: 1em;
   }

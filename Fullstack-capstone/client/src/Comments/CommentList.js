@@ -13,6 +13,7 @@ import { ArtPostContext } from "../providers/ArtPostProvider";
 import { CommentContext } from "../providers/CommentProvider";
 import Comment from "./Comment"
 import CommentAdd from "./CommentAdd"
+import "./Comments.css"
 
 
 export default function CommentList(props) {
@@ -53,12 +54,15 @@ export default function CommentList(props) {
 
     return (
         <>
+            <div className="CommentContainer">
+                <CommentAdd setAddRefresh={setAddRefresh} addRefresh={addRefresh} />
+                <Col className="CommentList">
+                    {comments.length != 0 ? comments.map(artPostComment => (
 
-            <CommentAdd setAddRefresh={setAddRefresh} addRefresh={addRefresh} />
-            {comments.length != 0 ? comments.map(artPostComment => (
-
-                <Comment key={artPostComment.id} edit={edit} setEdit={setEdit} setEditRefresh={setEditRefresh} editRefresh={editRefresh} comment={artPostComment} setDeleteRefresh={setDeleteRefresh} deleteRefresh={deleteRefresh} setRefresh={props.setRefresh} refresh={props.refresh} />
-            )) : null}
+                        <Comment key={artPostComment.id} edit={edit} setEdit={setEdit} setEditRefresh={setEditRefresh} editRefresh={editRefresh} comment={artPostComment} setDeleteRefresh={setDeleteRefresh} deleteRefresh={deleteRefresh} setRefresh={props.setRefresh} refresh={props.refresh} />
+                    )) : null}
+                </Col>
+            </div>
 
         </>
     )

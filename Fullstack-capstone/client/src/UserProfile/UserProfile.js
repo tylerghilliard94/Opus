@@ -36,16 +36,6 @@ export default function PostDetails() {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
     const { id } = useParams();
-
-    useEffect(() => {
-
-        if (singleUserProfile.id != undefined) {
-            sleep(300).then(() => getAllArtPostsByUserId(singleUserProfile.id))
-            sleep(800).then(() => setIsLoading(false))
-        }
-        setIsLoading(true)
-    }, [singleUserProfile])
-
     useEffect(() => {
 
         getUserProfileById(id)
@@ -57,6 +47,19 @@ export default function PostDetails() {
         setRefresh(refresh + 1)
 
     }, [singleUserProfile])
+
+    useEffect(() => {
+
+        if (singleUserProfile.id != undefined) {
+            sleep(300).then(() => getAllArtPostsByUserId(singleUserProfile.id))
+            sleep(800).then(() => setIsLoading(false))
+        }
+        setIsLoading(true)
+    }, [singleUserProfile])
+
+
+
+    console.log(singleUserProfile)
 
     if (isLoading) {
         return <Spinner animation="border" role="status">
@@ -74,7 +77,7 @@ export default function PostDetails() {
                 <Col>
                     <Row><h2>{singleUserProfile.displayName}</h2></Row>
                     <Row><h2>{singleUserProfile.fullName}</h2></Row>
-                    <Row><h2>{singleUserProfile.primaryFocus.name} Focused</h2></Row>
+                    {singleUserProfile != undefined ? <Row><h2>{singleUserProfile.primaryFocus.name} Focused</h2></Row> : null}
 
 
 

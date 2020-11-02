@@ -1,0 +1,23 @@
+.AddComment{
+    width: 70%;
+    margin-left: 8%;
+    margin-bottom: 5%;
+  
+}
+.AddCommentButton{
+    margin-bottom: 5%;
+}
+
+.CommentTitle{
+    text-align: center;
+    margin-left: 2%;
+    margin-bottom: 5%;
+}
+
+.CommentList{
+    margin-left: 4%;
+}
+.CommentContainer{
+    margin-left: -1%;
+    width: 120%;
+}

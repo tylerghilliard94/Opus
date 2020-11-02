@@ -17,7 +17,7 @@ export function UserProfileProvider(props) {
   const [isFirebaseReady, setIsFirebaseReady] = useState(false);
 
   const [allUserProfiles, setAllUserProfiles] = useState([]);
-  const [singleUserProfile, setSingleUserProfile] = useState({ userType: {} });
+  const [singleUserProfile, setSingleUserProfile] = useState({ primaryFocus: {} });
 
 
 

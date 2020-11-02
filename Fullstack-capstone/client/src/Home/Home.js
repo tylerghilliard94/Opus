@@ -17,8 +17,9 @@ export default function Home() {
     return (
         <>
 
-            <NavLink to="explore"><Button>Explore</Button></NavLink>
+
             <HomeCarousel />
+            <NavLink to="explore"><Button>Explore</Button></NavLink>
         </>
     )
 

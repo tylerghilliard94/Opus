@@ -64,7 +64,7 @@ namespace Fullstack_capstone.Repositories
                        ";
 
 
-                   
+
                     var reader = cmd.ExecuteReader();
                     List<ArtPost> artPosts = new List<ArtPost>();
 
@@ -261,17 +261,17 @@ namespace Fullstack_capstone.Repositories
                               LEFT JOIN Categories c ON ap.CategoryId = c.Id
                               LEFT JOIN ArtType at ON ap.ArtTypeId = at.Id
                         WHERE isDeleted = 0";
-                    foreach(Following follow in follows)
+                    foreach (Following follow in follows)
                     {
                         cmd.CommandText += $"AND ap.UserProfileId = {follow.SubscribedToId}";
-                      
+
                     }
 
                     cmd.CommandText += "ORDER BY ap.PostDate;";
-                      
-                      
 
-                    
+
+
+
                     List<ArtPost> artPosts = new List<ArtPost>();
                     var reader = cmd.ExecuteReader();
 
@@ -337,7 +337,7 @@ namespace Fullstack_capstone.Repositories
                     cmd.Parameters.AddWithValue("@title", artPost.Title);
                     cmd.Parameters.AddWithValue("@description", artPost.Description);
                     cmd.Parameters.AddWithValue("@image", artPost.Image);
-                  
+
 
                     cmd.Parameters.AddWithValue("@categoryId", artPost.CategoryId);
                     cmd.Parameters.AddWithValue("@artTypeId", artPost.ArtTypeId);
@@ -443,7 +443,7 @@ namespace Fullstack_capstone.Repositories
                               LEFT JOIN UserProfile u ON ap.UserProfileId = u.Id
                               LEFT JOIN Categories c ON ap.CategoryId = c.Id
                               LEFT JOIN ArtType at ON ap.ArtTypeId = at.Id
-                      
+                            
                         
                         
                     ";
@@ -451,9 +451,12 @@ namespace Fullstack_capstone.Repositories
                     {
                         cmd.CommandText += " WHERE ap.IsDeleted = 0";
                     }
-                    else if (ArtTypeCriterion == 0){
+                    else if (ArtTypeCriterion == 0)
+                    {
                         cmd.CommandText += " WHERE ap.CategoryId = @CategoryCriterion AND ap.IsDeleted = 0";
-                    }else if (CategoryCriterion == 0){
+                    }
+                    else if (CategoryCriterion == 0)
+                    {
                         cmd.CommandText += " WHERE ap.ArtTypeId = @ArtTypeCriterion AND ap.IsDeleted = 0";
                     }
                     else
@@ -461,26 +464,31 @@ namespace Fullstack_capstone.Repositories
                         cmd.CommandText += "WHERE ap.CategoryId = @CategoryCriterion AND ap.ArtTypeId = @ArtTypeCriterion AND ap.IsDeleted = 0";
                     }
 
-                    if(latestSwitch == true)
+                    if (latestSwitch == true)
                     {
                         cmd.CommandText += "ORDER BY ap.PostDate DESC";
                     }
-                    else if(trendingSwitch == true)
+                    else if (trendingSwitch == true)
                     {
                         cmd.CommandText += "ORDER BY ap.Likes DESC";
-                    }else if(follows.Count != 0)
+                    }
+                    else if (follows.Count != 0)
                     {
                         cmd.CommandText += $"AND ap.UserProfileId in(";
                         foreach (Following follow in follows)
                         {
-                          
-                           
-                              cmd.CommandText += $"{follow.SubscribedToId},";
-                            
 
-                        if (follow == follows[follows.Count - 1])
-                        {
-                            cmd.CommandText += $"{follow.SubscribedToId}";
+
+
+
+                            if (follow == follows[follows.Count - 1])
+                            {
+                                cmd.CommandText += $"{follow.SubscribedToId}";
+                            }
+                            else
+                            {
+
+                                cmd.CommandText += $"{follow.SubscribedToId},";
                             }
 
 
@@ -488,30 +496,36 @@ namespace Fullstack_capstone.Repositories
                         cmd.CommandText += $")";
 
                         cmd.CommandText += "ORDER BY ap.PostDate DESC;";
-                    }else if(favorites.Count != 0)
+                    }
+                    else if (favorites.Count != 0)
                     {
                         cmd.CommandText += $"AND ap.Id in(";
                         foreach (Favorite favorite in favorites)
                         {
 
 
-                          
-                                cmd.CommandText += $"{favorite.PostId},";
-                            if(favorite == favorites[favorites.Count - 1])
+
+                     
+
+                            if (favorite == favorites[favorites.Count - 1])
                             {
                                 cmd.CommandText += $"{favorite.PostId}";
                             }
-                            
-                                
-                            
+                            else
+                            {
+                                cmd.CommandText += $"{favorite.PostId},";
+                            }
 
-                        
+
+
+
+
 
                         }
                         cmd.CommandText += $")";
                         cmd.CommandText += "ORDER BY ap.PostDate DESC;";
                     }
-                    
+
 
                     DbUtils.AddParameter(cmd, "@CategoryCriterion", CategoryCriterion);
                     DbUtils.AddParameter(cmd, "@ArtTypeCriterion", ArtTypeCriterion);
@@ -519,7 +533,7 @@ namespace Fullstack_capstone.Repositories
                     var reader = cmd.ExecuteReader();
 
                     List<ArtPost> artPosts = new List<ArtPost>();
-                 
+
 
                     while (reader.Read())
                     {
@@ -560,7 +574,7 @@ namespace Fullstack_capstone.Repositories
                 }
             }
         }
-   
+
 
 
 

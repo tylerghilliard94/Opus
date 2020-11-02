@@ -11,6 +11,7 @@ import {
 import { ArtPostContext } from '../providers/ArtPostProvider';
 import { FollowingContext } from '../providers/FollowingProvider';
 import { Link } from "react-router-dom"
+import "./Home.css"
 let items = [
 
 ];
@@ -85,7 +86,12 @@ const HomeCarousel = (props) => {
                 key={item.src}
             >
                 <CarouselCaption captionText={item.caption} captionHeader={item.altText} />
-                <Link to={`/details/${item.id}`}><img className="carouselImg" src={item.src} alt={item.altText} /></Link>
+                <Link to={`/details/${item.id}`}><img style={{
+                    flex: 1,
+                    width: 700,
+                    height: 600,
+                    resizeMode: 'contain'
+                }} className="carouselImg" src={item.src} alt={item.altText} /></Link>
 
             </CarouselItem>
         );
@@ -97,6 +103,7 @@ const HomeCarousel = (props) => {
     }
     return (
         <Carousel
+            className="Carousel"
             activeIndex={activeIndex}
             next={next}
             previous={previous}
