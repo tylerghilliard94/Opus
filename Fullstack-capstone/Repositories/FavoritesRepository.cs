@@ -40,7 +40,7 @@ namespace Fullstack_capstone.Repositories
                     cmd.CommandText = @"
                        SELECT f.Id, f.UserProfileId, f.PostId
                          FROM Favorites f
-                        
+                        WHERE f.UserProfileId = @id
               
                         ;
                       
