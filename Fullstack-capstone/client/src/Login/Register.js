@@ -1,27 +1,38 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
+import { PrimaryFocusContext } from "../providers/PrimaryFocusProvider";
 
 export default function Register() {
   const history = useHistory();
   const { register } = useContext(UserProfileContext);
+  const { primaryFoci, getAllPrimaryFoci } = useContext(PrimaryFocusContext);
 
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
+
+  const [fullName, setFullName] = useState();
+
   const [displayName, setDisplayName] = useState();
   const [email, setEmail] = useState();
-  const [imageLocation, setImageLocation] = useState(" ");
+  const [primaryFocusId, setPrimaryFocusId] = useState();
+  const [description, setDescription] = useState();
+  const [image, setImage] = useState(" ");
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [imageName, setImageName] = useState();
 
+
+  useEffect(() => {
+    getAllPrimaryFoci();
+  }, [])
   const registerClick = (e) => {
     e.preventDefault();
+    debugger
+
     if (password && password !== confirmPassword) {
       alert("Passwords don't match. Do better.");
     } else {
-      const userProfile = { firstName, lastName, displayName, imageLocation, email };
+      const userProfile = { fullName, primaryFocusId, description, displayName, image, email };
       register(userProfile, password)
         .then(() => history.push("/"));
     }
@@ -29,7 +40,7 @@ export default function Register() {
   const checkUploadResult = (resultEvent) => {
     if (resultEvent.event === 'success') {
       debugger
-      setImageLocation(resultEvent.info.secure_url)
+      setImage(resultEvent.info.secure_url)
       setImageName(resultEvent.info.original_filename + `.${resultEvent.info.format}`)
 
     }
@@ -51,13 +62,10 @@ export default function Register() {
     <Form onSubmit={registerClick}>
       <fieldset>
         <FormGroup>
-          <Label htmlFor="firstName">First Name</Label>
-          <Input id="firstName" type="text" onChange={e => setFirstName(e.target.value)} />
+          <Label htmlFor="firstName">Full Name</Label>
+          <Input id="fullName" type="text" onChange={e => setFullName(e.target.value)} />
         </FormGroup>
-        <FormGroup>
-          <Label htmlFor="lastName">Last Name</Label>
-          <Input id="lastName" type="text" onChange={e => setLastName(e.target.value)} />
-        </FormGroup>
+
         <FormGroup>
           <Label htmlFor="displayName">Display Name</Label>
           <Input id="displayName" type="text" onChange={e => setDisplayName(e.target.value)} />
@@ -70,6 +78,30 @@ export default function Register() {
           <div>
             <Button onClick={showWidget}>Upload Photo</Button> <p>{imageName}</p>
           </div>
+        </FormGroup>
+        <FormGroup>
+          <Label for="primaryfocus">Primary Focus</Label>
+          {primaryFoci != undefined ?
+            <select
+              className="newUser"
+              onChange={e => setPrimaryFocusId(parseInt(e.target.value))}
+              defaultValue={3}
+              id="primaryFocusId"
+
+            >
+              {primaryFoci.map(primaryFocus => {
+
+                return <option key={primaryFocus.id} value={primaryFocus.id}>{primaryFocus.name}</option>
+
+
+              })}
+
+            </select> : null
+          }
+        </FormGroup>
+        <FormGroup>
+          <Label for="description">Description</Label>
+          <Input id="description" type="text" onChange={e => setDescription(e.target.value)} />
         </FormGroup>
         <FormGroup>
           <Label for="password">Password</Label>

@@ -66,18 +66,19 @@ namespace Fullstack_capstone.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FullName, DisplayName, 
-                                                                 Email,   PrimaryFocusId, Image)
+                                                                 Email,   PrimaryFocusId, Image, Description)
                                         OUTPUT INSERTED.ID
                                         VALUES (@FirebaseUserId, @Fullname, @DisplayName, 
-                                                @Email,  @PrimaryFocusId, @Image)";
+                                                @Email,  @PrimaryFocusId, @Image, @Description)";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@FullName", userProfile.FullName);
              
                     DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
                     DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
                    
-                    DbUtils.AddParameter(cmd, "@ImageLocation", userProfile.Image);
-                    DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.PrimaryFocusId);
+                    DbUtils.AddParameter(cmd, "@Image", userProfile.Image);
+                    DbUtils.AddParameter(cmd, "@PrimaryFocusId", userProfile.PrimaryFocusId);
+                    DbUtils.AddParameter(cmd, "@Description", userProfile.Description);
 
                     userProfile.Id = (int)cmd.ExecuteScalar();
                 }
