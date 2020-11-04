@@ -8,6 +8,8 @@ import { PrimaryFocusProvider } from './providers/PrimaryFocusProvider';
 import { ArtPostProvider } from './providers/ArtPostProvider';
 import { CategoryProvider } from './providers/CategoryProvider';
 import { LikeProvider } from './providers/LikeProvider';
+import { FollowingProvider } from './providers/FollowingProvider';
+import { FavoriteProvider } from './providers/FavoriteProvider';
 
 
 //"object undefined" error on browser if you do not include the provider in App.js
@@ -20,14 +22,18 @@ function App() {
         <PrimaryFocusProvider>
           <CategoryProvider>
             <LikeProvider>
-              <ArtPostProvider>
+              <FollowingProvider>
+                <FavoriteProvider>
+                  <ArtPostProvider>
 
 
-                <Header />
-                <ApplicationViews />
+                    <Header />
+                    <ApplicationViews />
 
 
-              </ArtPostProvider>
+                  </ArtPostProvider>
+                </FavoriteProvider>
+              </FollowingProvider>
             </LikeProvider>
           </CategoryProvider>
         </PrimaryFocusProvider>

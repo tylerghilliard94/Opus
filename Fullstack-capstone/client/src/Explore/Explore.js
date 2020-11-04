@@ -6,6 +6,8 @@ import { Button, Row, Col } from "reactstrap";
 import { ArtPostContext } from "../providers/ArtPostProvider";
 import ArtPostList from "../ArtPost/ArtPostList"
 import CategoryList from "../Categories/CategoryList"
+import { FollowingContext } from "../providers/FollowingProvider";
+import { FavoriteContext } from "../providers/FavoriteProvider";
 
 
 
@@ -13,29 +15,54 @@ import CategoryList from "../Categories/CategoryList"
 
 export default function Explore() {
     const { getAllArtPosts, artPosts, searchArtPosts } = useContext(ArtPostContext)
+    const { following, getFollowing } = useContext(FollowingContext)
+    const { favorites, getFavorites } = useContext(FavoriteContext)
     const [latestSwitch, setLatestSwitch] = useState(false)
     const [trendingSwitch, setTrendingSwitch] = useState(true)
+    const [followingSwitch, setFollowingSwitch] = useState(false)
+    const [favoriteSwitch, setFavoriteSwitch] = useState(false)
     const [artType, setArtType] = useState(0);
     const [category, setCategory] = useState(0);
 
     const search = () => {
 
-        searchArtPosts(category, artType, latestSwitch, trendingSwitch)
+        searchArtPosts(sessionStorage.userProfileId, category, artType, latestSwitch, trendingSwitch, followingSwitch, favoriteSwitch)
     }
     useEffect(() => {
 
+        getFollowing(sessionStorage.userProfileId)
+        getFavorites(sessionStorage.userProfileId)
         search()
-    }, [category, artType, latestSwitch])
+    }, [category, artType, latestSwitch, trendingSwitch, followingSwitch, favoriteSwitch])
 
     const handleLatest = () => {
-
+        setFavoriteSwitch(false)
         setLatestSwitch(true)
         setTrendingSwitch(false)
+        setFollowingSwitch(false)
 
     }
     const handleTrending = () => {
+        setFavoriteSwitch(false)
         setTrendingSwitch(true)
         setLatestSwitch(false)
+        setFollowingSwitch(false)
+
+    }
+    console.log(favorites)
+    const handleFollowing = () => {
+        setFavoriteSwitch(false)
+        setFollowingSwitch(true)
+        setLatestSwitch(false)
+        setTrendingSwitch(false)
+
+    }
+
+    const handleFavorites = () => {
+        setFavoriteSwitch(true)
+        setFollowingSwitch(false)
+        setLatestSwitch(false)
+        setTrendingSwitch(false)
 
     }
     return (
@@ -62,12 +89,18 @@ export default function Explore() {
             </Button>}
 
 
-                        <Button>
-                            Following
-            </Button>
-                        <Button>
-                            Favorites
-            </Button>
+                        {following.length == 0 ? null : followingSwitch == false ?
+                            <Button onClick={handleFollowing}>
+                                Following
+            </Button> : <Button color="primary" >
+                                Following
+            </Button>}
+                        {favorites.length == 0 ? null : favoriteSwitch == false ?
+                            <Button onClick={handleFavorites}>
+                                Favorites
+            </Button> : <Button color="primary" >
+                                Favorites
+            </Button>}
                     </Row>
 
                     <ArtPostList />

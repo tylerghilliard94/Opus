@@ -3,6 +3,7 @@ using System;
 using Fullstack_capstone.Models;
 using Fullstack_capstone.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace Fullstack_capstone.Controllers
 {
@@ -12,9 +13,11 @@ namespace Fullstack_capstone.Controllers
     public class FollowingController : ControllerBase
     {
         private readonly IFollowingRepository _followingRepository;
-        public FollowingController(IFollowingRepository followingRepository)
+        private readonly IArtPostRepository _artPostRepository;
+        public FollowingController(IFollowingRepository followingRepository, IArtPostRepository artPostRepository)
         {
             _followingRepository = followingRepository;
+            _artPostRepository = artPostRepository;
         }
 
 
@@ -31,16 +34,22 @@ namespace Fullstack_capstone.Controllers
 
         //Get All Users
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult GetFollow(int id)
         {
             return Ok(_followingRepository.GetAllFollows(id));
         }
 
-      
+        [HttpGet("{subscriberId}/{subscribedToId}")]
+        public IActionResult GetFollow(int subscriberId, int subscribedToId)
+        {
+            return Ok(_followingRepository.GetFollowById(subscriberId, subscribedToId));
+        }
 
-       
 
-       
+
+
+
+
 
         [HttpPut("delete/{id}")]
         public IActionResult Delete(int id)

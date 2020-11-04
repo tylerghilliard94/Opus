@@ -76,6 +76,53 @@ namespace Fullstack_capstone.Repositories
             }
         }
 
+        public Following GetFollowById(int subscriberid, int subscribedToId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                       SELECT f.Id, f.SubscriberId, f.SubscribedToId
+                         FROM Following f
+                         WHERE f.SubscriberId = @subscriberId AND f.SubscribedToId = @subscribedToId
+                      
+                             
+              
+                       
+                      
+                       ";
+
+                    cmd.Parameters.AddWithValue("@subscriberId", subscriberid);
+                    cmd.Parameters.AddWithValue("@subscribedToId", subscribedToId);
+                    Following follow = new Following();
+                    var reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        follow = new Following()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            SubscriberId = DbUtils.GetInt(reader, "SubscriberId"),
+                            SubscribedToId = DbUtils.GetInt(reader, "SubscribedToId"),
+
+
+                        };
+
+
+
+
+
+                    }
+
+                    reader.Close();
+
+                    return follow;
+                }
+            }
+        }
+
 
 
 
@@ -90,7 +137,7 @@ namespace Fullstack_capstone.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        DELETE FROM Follow
+                        DELETE FROM Following
                        
                         WHERE Id = @id";
 

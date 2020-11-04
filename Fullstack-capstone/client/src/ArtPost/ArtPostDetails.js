@@ -6,6 +6,9 @@ import { Button, Row, Col } from "reactstrap";
 import { ArtPostContext } from "../providers/ArtPostProvider";
 import { LikeContext, LikeProvider } from "../providers/LikeProvider";
 import { UserProfileContext } from "../providers/UserProfileProvider";
+import Following from "../Following/Following"
+import Likes from "../Likes/Likes"
+import Favorites from "../Favorites/Favorites"
 
 
 
@@ -15,15 +18,12 @@ import { UserProfileContext } from "../providers/UserProfileProvider";
 export default function PostDetails() {
     const { getArtPost, artPost, addLike, removeLike } = useContext(ArtPostContext)
     const { singleUserProfile } = useContext(UserProfileContext)
-    const { getLike, like, saveLike, deleteLike } = useContext(LikeContext)
 
-    const [localLike, setLocalLike] = useState({
-        UserProfileId: singleUserProfile.id,
-        PostId: artPost.id
-    });
-    const [refresh, setRefresh] = useState(false);
 
-    console.log(like)
+
+    const [refresh, setRefresh] = useState(0);
+
+
 
     const { id } = useParams();
     useEffect(() => {
@@ -32,23 +32,9 @@ export default function PostDetails() {
 
     }, [refresh])
 
-    useEffect(() => {
-        localLike.UserProfileId = singleUserProfile.id
-        localLike.PostId = artPost.id
-    }, [artPost, singleUserProfile])
 
-    const handleLike = (evt) => {
 
-        addLike(artPost.id, artPost.likes)
-        saveLike(localLike)
-        setRefresh(true)
-    }
 
-    const handleRemoveLike = (evt) => {
-        removeLike(artPost.id, artPost.likes)
-        deleteLike(like.id)
-        setRefresh(false)
-    }
     return (
         <>
             <Row sm={8}>
@@ -56,7 +42,7 @@ export default function PostDetails() {
                     <Row><img class="postDetailsImg" src={artPost.image}></img></Row>
                     <Row><h2>{artPost.title}</h2></Row>
                     <Row><p>{artPost.description}</p></Row>
-                    <Row>{like.userProfileId == singleUserProfile.id && like.postId == artPost.id ? <Button onClick={handleRemoveLike}>Dislike</Button> : <Button onClick={handleLike}>Like</Button>}<p>{artPost.likes}</p><Button>Favorite</Button></Row>
+                    <Row><Likes setRefresh={setRefresh} /> <Favorites setRefresh={setRefresh} /></Row>
                     <Row><h3>Comments</h3> <Button>Add New Comment</Button></Row>
                 </Col>
 
@@ -64,7 +50,7 @@ export default function PostDetails() {
                     <Row><h2>{singleUserProfile.displayName}</h2></Row>
                     <Row><img class="userProfileImg" src={singleUserProfile.image}></img></Row>
                     <Row><p>{singleUserProfile.description}</p></Row>
-                    <Row><Button>Follow</Button> <Button>Details</Button></Row>
+                    <Row><Following setRefresh={setRefresh} /> <Button>Details</Button></Row>
 
                 </Col>
             </Row>
