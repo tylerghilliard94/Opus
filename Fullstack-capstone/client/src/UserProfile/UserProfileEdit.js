@@ -69,7 +69,8 @@ export default function UserProfileEdit() {
         setLocalUser(stateChange)
     }
     const handleSaveEdit = (evt) => {
-        debugger
+
+        localUser.PrimaryFocusId = parseInt(localUser.PrimaryFocusId)
         editUserProfile(localUser)
         history.push(`/profile/${sessionStorage.userProfileId}`)
 

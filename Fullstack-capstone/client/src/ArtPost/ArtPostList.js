@@ -20,7 +20,7 @@ export default function ArtPostList() {
 
 
 
-    console.log(artPosts)
+
 
 
     return (

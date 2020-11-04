@@ -55,8 +55,11 @@ namespace Fullstack_capstone.Repositories
                               LEFT JOIN UserProfile u ON ap.UserProfileId = u.Id
                               LEFT JOIN Categories c ON ap.CategoryId = c.Id
                               LEFT JOIN ArtType at ON ap.ArtTypeId = at.Id
-                        WHERE isDeleted = 0
-                        ORDER BY ap.PostDate;
+                        WHERE ap.isDeleted = 0
+                      
+                        ORDER BY ap.PostDate DESC
+                          OFFSET 0 ROWS Fetch next 10 rows only
+                       ;
                       
                        ";
 
@@ -467,28 +470,45 @@ namespace Fullstack_capstone.Repositories
                         cmd.CommandText += "ORDER BY ap.Likes DESC";
                     }else if(follows.Count != 0)
                     {
+                        cmd.CommandText += $"AND ap.UserProfileId in(";
                         foreach (Following follow in follows)
                         {
-                            cmd.CommandText += $"AND ap.UserProfileId = {follow.SubscribedToId}";
+                          
+                           
+                              cmd.CommandText += $"{follow.SubscribedToId},";
+                            
+
+                        if (follow == follows[follows.Count - 1])
+                        {
+                            cmd.CommandText += $"{follow.SubscribedToId}";
+                            }
+
 
                         }
+                        cmd.CommandText += $")";
 
                         cmd.CommandText += "ORDER BY ap.PostDate DESC;";
                     }else if(favorites.Count != 0)
                     {
+                        cmd.CommandText += $"AND ap.Id in(";
                         foreach (Favorite favorite in favorites)
                         {
-                            if(favorite == favorites[0])
+
+
+                          
+                                cmd.CommandText += $"{favorite.PostId},";
+                            if(favorite == favorites[favorites.Count - 1])
                             {
-                                cmd.CommandText += $"AND ap.Id = {favorite.PostId}";
-                            }
-                            else
-                            {
-                                cmd.CommandText += $"OR ap.Id = {favorite.PostId}";
+                                cmd.CommandText += $"{favorite.PostId}";
                             }
                             
+                                
+                            
+
+                        
 
                         }
+                        cmd.CommandText += $")";
                         cmd.CommandText += "ORDER BY ap.PostDate DESC;";
                     }
                     

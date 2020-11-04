@@ -14,7 +14,7 @@ export default function Register() {
 
   const [displayName, setDisplayName] = useState();
   const [email, setEmail] = useState();
-  const [primaryFocusId, setPrimaryFocusId] = useState();
+  const [primaryFocusId, setPrimaryFocusId] = useState(1);
   const [description, setDescription] = useState();
   const [image, setImage] = useState(" ");
   const [password, setPassword] = useState();
@@ -51,7 +51,8 @@ export default function Register() {
   const showWidget = (event) => {
     let widget = window.cloudinary.createUploadWidget({
       cloudName: "dgllrw1m3",
-      uploadPreset: "kxr8ogeo"
+      uploadPreset: "kxr8ogeo",
+      quality: "q_auto"
     },
       (error, result) => { checkUploadResult(result) })
 
@@ -85,7 +86,7 @@ export default function Register() {
             <select
               className="newUser"
               onChange={e => setPrimaryFocusId(parseInt(e.target.value))}
-              defaultValue={3}
+              defaultValue={1}
               id="primaryFocusId"
 
             >

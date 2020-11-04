@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { NavLink, useHistory, useParams } from "react-router-dom";
 
-import { Button, Row, Col, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Row, Col, Form, FormGroup, Label, Input, Spinner } from "reactstrap";
 import { ArtPostContext } from "../providers/ArtPostProvider";
 import { LikeContext, LikeProvider } from "../providers/LikeProvider";
 import { UserProfileContext } from "../providers/UserProfileProvider";
@@ -29,8 +29,11 @@ export default function PostDetails() {
 
 
     const [refresh, setRefresh] = useState(0);
+    const [isLoading, setIsLoading] = useState(false)
 
-
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
 
 
@@ -40,14 +43,22 @@ export default function PostDetails() {
         if (refresh != -5000) {
 
 
-            getArtPost(id)
+            sleep(300).then(() => getArtPost(id))
 
             getAllCategories()
         }
+        setIsLoading(true)
+        if (refresh != 0) {
+            setIsLoading(false)
+        }
+
+
+
 
     }, [refresh])
 
     useEffect(() => {
+
 
         if (artPost.id != undefined) {
             localArtPost.Id = artPost.id
@@ -56,9 +67,23 @@ export default function PostDetails() {
             localArtPost.Image = artPost.image
             localArtPost.CategoryId = artPost.categoryId
             localArtPost.ArtTypeId = artPost.artTypeId
+
         }
 
-    }, [artPost])
+
+
+
+
+
+
+    }, [singleUserProfile])
+    useEffect(() => {
+        setIsLoading(false)
+    }, [singleUserProfile])
+    useEffect(() => {
+        setIsLoading(true)
+    }, [])
+
     const handleChange = (evt) => {
         let stateChange = { ...localArtPost }
         stateChange[evt.target.id] = evt.target.value
@@ -72,6 +97,8 @@ export default function PostDetails() {
 
 
     const handleCloseEdit = (evt) => {
+        debugger
+        localArtPost.ArtTypeId = parseInt(localArtPost.ArtTypeId)
         localArtPost.CategoryId = parseInt(localArtPost.CategoryId)
         editArtPost(localArtPost)
         setRefresh(0)
@@ -98,11 +125,17 @@ export default function PostDetails() {
     const showWidget = (event) => {
         let widget = window.cloudinary.createUploadWidget({
             cloudName: "dgllrw1m3",
-            uploadPreset: "kxr8ogeo"
+            uploadPreset: "kxr8ogeo",
+
         },
             (error, result) => { checkUploadResult(result) })
 
         widget.open()
+    }
+    if (isLoading) {
+        return <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+        </Spinner>
     }
     if (postEdit == 1) {
         return (

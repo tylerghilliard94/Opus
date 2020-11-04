@@ -37,14 +37,14 @@ export default function Comment(props) {
     const handleDelete = (evt) => {
 
         deleteComment(evt.target.id)
-        props.setDeleteRefresh(props.deleteRefresh - 1)
+        props.setDeleteRefresh(props.deleteRefresh + 1)
     }
 
     const handleCloseEdit = (evt) => {
 
         editComment(comment, props.edit)
         props.setEdit(0)
-        props.setEditRefresh(props.editRefresh - 1)
+        props.setEditRefresh(props.editRefresh + 1)
     }
 
 

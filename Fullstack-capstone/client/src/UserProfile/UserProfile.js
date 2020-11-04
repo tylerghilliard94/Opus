@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { NavLink, useHistory, useParams } from "react-router-dom";
 
-import { Button, Row, Col, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Row, Col, Form, FormGroup, Label, Input, Spinner } from "reactstrap";
 import { ArtPostContext } from "../providers/ArtPostProvider";
 import { LikeContext, LikeProvider } from "../providers/LikeProvider";
 import { UserProfileContext } from "../providers/UserProfileProvider";
@@ -24,7 +24,7 @@ export default function PostDetails() {
     const { singleUserProfile, getUserProfileById } = useContext(UserProfileContext)
     const { getAllCategories, categories } = useContext(CategoryContext)
     const history = useHistory();
-
+    const [isLoading, setIsLoading] = useState(false)
 
 
     const [refresh, setRefresh] = useState(0);
@@ -32,14 +32,18 @@ export default function PostDetails() {
 
 
 
-
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
     const { id } = useParams();
 
     useEffect(() => {
 
         if (singleUserProfile.id != undefined) {
-            getAllArtPostsByUserId(singleUserProfile.id)
+            sleep(300).then(() => getAllArtPostsByUserId(singleUserProfile.id))
+            sleep(800).then(() => setIsLoading(false))
         }
+        setIsLoading(true)
     }, [singleUserProfile])
 
     useEffect(() => {
@@ -48,6 +52,17 @@ export default function PostDetails() {
 
     }, [id])
 
+    useEffect(() => {
+
+        setRefresh(refresh + 1)
+
+    }, [singleUserProfile])
+
+    if (isLoading) {
+        return <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+        </Spinner>
+    }
     return (
         <>
             <Row sm={8}>
@@ -59,13 +74,14 @@ export default function PostDetails() {
                 <Col>
                     <Row><h2>{singleUserProfile.displayName}</h2></Row>
                     <Row><h2>{singleUserProfile.fullName}</h2></Row>
+                    <Row><h2>{singleUserProfile.primaryFocus.name} Focused</h2></Row>
 
 
 
 
                 </Col>
                 <Col>
-                    {singleUserProfile.id == sessionStorage.userProfileId ? <NavLink to={"user/edit"}><Button>Editttttt</Button></NavLink> : null}
+                    {singleUserProfile.id == sessionStorage.userProfileId ? <NavLink to={"user/edit"}><Button>Edit</Button></NavLink> : null}
                     <Row><p>{singleUserProfile.description}</p></Row>
                     {singleUserProfile.id != sessionStorage.userProfileId ? <ProfileFollowing setRefresh={setRefresh} refresh={refresh} /> : null}
                     {singleUserProfile.id == sessionStorage.userProfileId ? <NavLink to={"post/add"}><Button>Add Art Post</Button></NavLink> : null}

@@ -22,7 +22,7 @@ export default function Header() {
     <>
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand tag={RRNavLink} to="/">Artorama</NavbarBrand>
+          <NavbarBrand tag={RRNavLink} to="/">Opus</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
