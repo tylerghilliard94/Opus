@@ -41,7 +41,11 @@ insert into UserProfile(Id, Image,FireBaseUserId, FullName, DisplayName, Email, 
 set identity_insert [UserProfile] off
 
 set identity_insert [ArtPost] on
-insert into ArtPost(Id, UserProfileId, Image, Title,PostDate, Description, CategoryId, ArtTypeId, IsDeleted) values(1, 1, 'https://cdnb.artstation.com/p/assets/images/images/031/366/305/large/emma-main-angle.jpg?1603397638', 'Mushrooms!!', '2020-10-23', 'A stylized mushroom for your pleasureable viewing experience.', 8, 1, 0 )
+insert into ArtPost(Id, UserProfileId, Image, Title,PostDate, Description, CategoryId, ArtTypeId, IsDeleted, Likes) values(1, 1, 'https://cdnb.artstation.com/p/assets/images/images/031/366/305/large/emma-main-angle.jpg?1603397638', 'Mushrooms!!', '2020-10-23', 'A stylized mushroom for your pleasureable viewing experience.', 8, 1, 0, 1 )
+insert into ArtPost(Id, UserProfileId, Image, Title,PostDate, Description, CategoryId, ArtTypeId, IsDeleted, Likes) values(2, 1, 'https://cdna.artstation.com/p/assets/images/images/031/321/486/large/sean-sevestre-shot-v2.jpg?1603281103', 'Train Dreaming', '2020-10-23', 'An illustration of an everday train ride.', 1, 1, 0, 25 )
+insert into ArtPost(Id, UserProfileId, Image, Title,PostDate, Description, CategoryId, ArtTypeId, IsDeleted, Likes) values(3, 1, 'https://cdnb.artstation.com/p/assets/images/images/030/857/475/large/tom-calcoen-img-01.jpg?1601887499', 'Battle Axe', '2020-10-23', 'Battle Axe of striking.', 13, 2, 0, 36 )
+insert into ArtPost(Id, UserProfileId, Image, Title,PostDate, Description, CategoryId, ArtTypeId, IsDeleted, Likes) values(4, 1, 'https://cdnb.artstation.com/p/assets/images/images/031/464/413/large/gaurav-kumar-goatman01-128.jpg?1603721161', 'Anatomy', '2020-10-23', 'Devil Anotomy study.', 2, 2, 0, 12 )
+insert into ArtPost(Id, UserProfileId, Image, Title,PostDate, Description, CategoryId, ArtTypeId, IsDeleted, Likes) values(5, 1, 'https://cdnb.artstation.com/p/assets/images/images/031/437/403/4k/fred-rambaud-skullz-scout-2.jpg?1603639527', 'Character Design', '2020-10-23', 'Design.', 6, 1, 0, 50 )
 set identity_insert [ArtPost] off
 
 GO

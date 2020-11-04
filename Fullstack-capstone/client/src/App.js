@@ -5,6 +5,8 @@ import { UserProfileProvider } from "./providers/UserProfileProvider";
 import Header from "./Header";
 import ApplicationViews from "./ApplicationViews/ApplicationViews";
 import { PrimaryFocusProvider } from './providers/PrimaryFocusProvider';
+import { ArtPostProvider } from './providers/ArtPostProvider';
+import { CategoryProvider } from './providers/CategoryProvider';
 
 
 //"object undefined" error on browser if you do not include the provider in App.js
@@ -15,11 +17,16 @@ function App() {
     <Router>
       <UserProfileProvider>
         <PrimaryFocusProvider>
+          <CategoryProvider>
+            <ArtPostProvider>
 
 
-          <Header />
-          <ApplicationViews />
+              <Header />
+              <ApplicationViews />
 
+
+            </ArtPostProvider>
+          </CategoryProvider>
         </PrimaryFocusProvider>
       </UserProfileProvider>
     </Router>

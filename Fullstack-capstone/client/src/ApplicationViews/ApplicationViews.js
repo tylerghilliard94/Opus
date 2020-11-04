@@ -4,6 +4,7 @@ import { UserProfileContext } from "../providers/UserProfileProvider";
 import Login from "../Login/Login";
 import Register from "../Login/Register";
 import Hello from "../Hello";
+import Explore from "../Explore/Explore";
 
 
 export default function ApplicationViews(props) {
@@ -15,6 +16,9 @@ export default function ApplicationViews(props) {
       <Switch>
         <Route path="/" exact>
           {isLoggedIn ? <Hello /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/explore" exact>
+          {isLoggedIn ? <Explore /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/login">
