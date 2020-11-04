@@ -222,7 +222,7 @@ export default function PostDetails() {
                             </div>
                             <Row ><Col><h2 className="PostTitle">{artPost.title}</h2></Col></Row>
                             <Col className="PostDesc"><p >{artPost.description}</p></Col>
-                            <Row><Likes setRefresh={setRefresh} />{sessionStorage.userProfileId == singleUserProfile.id ? <Row><Col ><Button className="EditPostButton" id={artPost.id} onClick={handleOpenEdit}>Edit</Button></Col> <Col><Button className="EditPostButton" id={artPost.id} onClick={handleDelete}>Delete</Button></Col></Row> : <Col className="Favorite" sm={7}><Favorites setRefresh={setRefresh} /></Col>}</Row>
+                            <Row><Likes setRefresh={setRefresh} />{sessionStorage.userProfileId == singleUserProfile.id ? <Row><Col ><Button className="EditPostButton" id={artPost.id} onClick={handleOpenEdit}>Edit</Button></Col> <Col><Button className="EditPostButton" id={artPost.id} onClick={handleDelete}>Delete</Button></Col></Row> : <Col className="Favorite" sm={8}><Favorites setRefresh={setRefresh} /></Col>}</Row>
                             <div class="wrapper">
                                 <div class="divider div-transparent div-arrow-down"></div>
                             </div>
