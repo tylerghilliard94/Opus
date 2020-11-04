@@ -225,7 +225,7 @@ margin-right: 2.5%;
 }
 
 .Favorite {
-  margin-left: 10%;
+  margin-left: 7%;
 }
 
 .Following{
@@ -276,8 +276,8 @@ margin-right: 2.5%;
 }
 
 .LikeCounter{
-    margin-top:2%;
-    margin-left: 2%;
+    margin-top: 2%;
+    margin-left: 6%;
     padding-right: 5%;
 }
 
@@ -405,4 +405,8 @@ margin-bottom: 5%;
 .AddPostCancelButton{
     margin-left: 1250%;
 
+}
+
+.TotalLikes{
+    margin-left: 2%;
 }

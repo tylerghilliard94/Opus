@@ -99,7 +99,7 @@ const HomeCarousel = (props) => {
                 onExited={() => setAnimating(false)}
                 key={item.src}
             >
-                <CarouselCaption captionText={item.caption} captionHeader={item.altText} />
+                <CarouselCaption className="CarouselText" captionText={item.caption} captionHeader={item.altText} />
                 <Link to={`/details/${item.id}`}><img style={{
                     flex: 1,
                     width: 800,
