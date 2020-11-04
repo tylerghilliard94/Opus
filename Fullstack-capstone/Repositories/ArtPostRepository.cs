@@ -324,17 +324,17 @@ namespace Fullstack_capstone.Repositories
                         SET
                         Title = @title,
                         Description = @description,
-                        Image = @imageLocation,
-                        PostDate = @postDate,
+                        Image = @image,
+                      
                        
-                        ArtTypeId = @artTypeId
+                        ArtTypeId = @artTypeId,
                         CategoryId = @categoryId
                         WHERE Id = @id";
 
                     cmd.Parameters.AddWithValue("@title", artPost.Title);
                     cmd.Parameters.AddWithValue("@description", artPost.Description);
                     cmd.Parameters.AddWithValue("@image", artPost.Image);
-                    cmd.Parameters.AddWithValue("@postDate", artPost.PostDate);
+                  
 
                     cmd.Parameters.AddWithValue("@categoryId", artPost.CategoryId);
                     cmd.Parameters.AddWithValue("@artTypeId", artPost.ArtTypeId);

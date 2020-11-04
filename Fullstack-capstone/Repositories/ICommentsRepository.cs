@@ -7,8 +7,8 @@ namespace Fullstack_capstone.Repositories
     {
         void Add(Comment comment);
         void DeleteComment(int id);
-        List<Comment> GetAllComments();
+        List<Comment> GetAllComments(int id);
         Comment GetCommentById(int id);
-        void UpdateComment(Comment comment);
+        void UpdateComment(Comment comment, int id);
     }
 }

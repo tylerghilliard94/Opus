@@ -24,6 +24,7 @@ export default function Explore() {
     const [artType, setArtType] = useState(0);
     const [category, setCategory] = useState(0);
 
+
     const search = () => {
 
         searchArtPosts(sessionStorage.userProfileId, category, artType, latestSwitch, trendingSwitch, followingSwitch, favoriteSwitch)
