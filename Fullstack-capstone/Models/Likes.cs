@@ -11,11 +11,11 @@ namespace Fullstack_capstone.Models
 
         public int UserProfileId { get; set; }
 
-        public UserProfile UserProfile { get; set; }
+       
 
         public int PostId { get; set; }
 
-        public ArtPost ArtPost {get; set;}
+    
 
 
     }

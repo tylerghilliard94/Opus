@@ -7,6 +7,7 @@ import ApplicationViews from "./ApplicationViews/ApplicationViews";
 import { PrimaryFocusProvider } from './providers/PrimaryFocusProvider';
 import { ArtPostProvider } from './providers/ArtPostProvider';
 import { CategoryProvider } from './providers/CategoryProvider';
+import { LikeProvider } from './providers/LikeProvider';
 
 
 //"object undefined" error on browser if you do not include the provider in App.js
@@ -18,14 +19,16 @@ function App() {
       <UserProfileProvider>
         <PrimaryFocusProvider>
           <CategoryProvider>
-            <ArtPostProvider>
+            <LikeProvider>
+              <ArtPostProvider>
 
 
-              <Header />
-              <ApplicationViews />
+                <Header />
+                <ApplicationViews />
 
 
-            </ArtPostProvider>
+              </ArtPostProvider>
+            </LikeProvider>
           </CategoryProvider>
         </PrimaryFocusProvider>
       </UserProfileProvider>

@@ -1,4 +1,5 @@
 import React, { useState, createContext, useContext } from "react";
+import { LikeContext } from "./LikeProvider";
 
 
 
@@ -15,7 +16,9 @@ export function ArtPostProvider(props) {
     const [artPost, setArtPost] = useState({ UserProfile: {}, Category: {}, ArtType: {} });
 
 
-    const { getToken } = useContext(UserProfileContext);
+
+    const { getToken, getUserProfileById } = useContext(UserProfileContext);
+    const { getLike } = useContext(LikeContext);
 
     const getAllArtPosts = () => {
         return getToken().then((token) =>
@@ -29,13 +32,19 @@ export function ArtPostProvider(props) {
     };
 
     const getArtPost = (id) => {
+
         return getToken().then((token) =>
             fetch(`/api/artpost/${id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }).then(resp => resp.json()).then(setArtPost))
+            }).then(resp => resp.json()).then((resp) => {
+
+                getUserProfileById(resp.userProfileId)
+                getLike(resp.userProfileId, resp.id)
+                setArtPost(resp)
+            }))
     };
 
 
@@ -67,6 +76,7 @@ export function ArtPostProvider(props) {
             fetch(`/api/artpost`, {
                 method: "PUT",
                 headers: {
+
                     Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify(artPost)
@@ -83,10 +93,32 @@ export function ArtPostProvider(props) {
             }))
     };
 
+    const addLike = (id, likes) => {
+
+        return getToken().then((token) =>
+            fetch(`/api/artpost/addLike/${id}/${likes}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+
+            }))
+    };
+    const removeLike = (id, likes) => {
+        return getToken().then((token) =>
+            fetch(`/api/artpost/removeLike/${id}/${likes}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+
+
+            }))
+    };
 
 
     return (
-        <ArtPostContext.Provider value={{ getToken, artPost, artPosts, getAllArtPosts, getArtPost, searchArtPosts, saveArtPost, editArtPost, deleteArtPost }}>
+        <ArtPostContext.Provider value={{ getToken, artPost, artPosts, getAllArtPosts, getArtPost, searchArtPosts, saveArtPost, editArtPost, deleteArtPost, addLike, removeLike }}>
             {props.children}
         </ArtPostContext.Provider>
     );

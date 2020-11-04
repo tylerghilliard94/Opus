@@ -146,7 +146,7 @@ namespace Fullstack_capstone.Repositories
                 {
                     cmd.CommandText = @"
                        SELECT u.id, u.FullName, u.FirebaseUserId, u.DisplayName, u.Email,
-                           u.Image, u.PrimaryFocusId,
+                           u.Image, u.PrimaryFocusId, u.Description,
                               pf.[Name] AS PrimaryFocus
                          FROM UserProfile u
                               LEFT JOIN PrimaryFocus pf ON u.PrimaryFocusId = pf.id
@@ -169,7 +169,7 @@ namespace Fullstack_capstone.Repositories
                             FullName = reader.GetString(reader.GetOrdinal("FullName")),
                             
                             DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
-                           
+                            Description = reader.GetString(reader.GetOrdinal("Description")),
                             Image = DbUtils.GetNullableString(reader, "Image"),
                             PrimaryFocusId = reader.GetInt32(reader.GetOrdinal("PrimaryFocusId")),
                             PrimaryFocus = new PrimaryFocus()

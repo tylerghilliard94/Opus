@@ -26,7 +26,7 @@ export default function ArtPost(props) {
 
     return (
 
-        <Link to={`artpost/${props.post.id}`}><img style={{
+        <Link to={`details/${props.post.id}`}><img style={{
             flex: 1,
             width: 200,
             height: 200,

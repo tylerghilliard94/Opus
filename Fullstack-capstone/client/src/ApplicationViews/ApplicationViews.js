@@ -5,6 +5,7 @@ import Login from "../Login/Login";
 import Register from "../Login/Register";
 import Hello from "../Hello";
 import Explore from "../Explore/Explore";
+import ArtPostDetails from "../ArtPost/ArtPostDetails"
 
 
 export default function ApplicationViews(props) {
@@ -19,6 +20,10 @@ export default function ApplicationViews(props) {
         </Route>
         <Route path="/explore" exact>
           {isLoggedIn ? <Explore /> : <Redirect to="/login" />}
+        </Route>
+
+        <Route path="/details/:id" exact>
+          {isLoggedIn ? <ArtPostDetails /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/login">
