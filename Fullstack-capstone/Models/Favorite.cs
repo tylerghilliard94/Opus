@@ -16,6 +16,6 @@ namespace Fullstack_capstone.Models
 
         public int PostId { get; set; }
 
-        public ArtPost ArtPsot { get; set; }
+        public ArtPost ArtPost { get; set; }
     }
 }

@@ -30,6 +30,6 @@ namespace Fullstack_capstone.Models
 
         public ArtType ArtType { get; set; }
 
-        public int IsDelete { get; set; }
+        public int IsDeleted { get; set; }
     }
 }
