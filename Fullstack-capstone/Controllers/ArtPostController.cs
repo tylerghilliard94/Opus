@@ -29,7 +29,7 @@ namespace Fullstack_capstone.Controllers
         public IActionResult Post(ArtPost artPost)
         {
 
-
+            artPost.PostDate = DateTime.Now;
             _artPostRepository.Add(artPost);
             return Ok();
         }

@@ -27,19 +27,24 @@ export default function Header() {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               { /* When isLoggedIn === true, we will render the Home link */}
+
+
               {isLoggedIn &&
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/">Home</NavLink>
+                  <NavLink tag={RRNavLink} to={`/explore`}>Explore</NavLink>
                 </NavItem>
               }
-
-
 
 
 
             </Nav>
 
             <Nav navbar>
+              {isLoggedIn &&
+                <NavItem>
+                  <NavLink tag={RRNavLink} to={`/profile/${sessionStorage.userProfileId}`}>Profile</NavLink>
+                </NavItem>
+              }
               {isLoggedIn &&
                 <>
                   <NavItem>

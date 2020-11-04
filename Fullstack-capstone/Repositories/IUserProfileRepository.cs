@@ -10,10 +10,14 @@ namespace Fullstack_capstone.Repositories
 
         List<UserProfile> GetAllUserProfiles();
         UserProfile GetUserProfileById(int id);
+        public void UpdateUserProfile(UserProfile userProfile);
 
-    
+        public void DeleteUserProfile(int id);
 
-    
-      
+
+
+
+
+
     }
 }

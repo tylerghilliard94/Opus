@@ -108,13 +108,36 @@ export function UserProfileProvider(props) {
       .then((resp) => setSingleUserProfile(resp));;
   };
 
+  const editUserProfile = (user) => {
+    debugger
+    return getToken().then((token) =>
+      fetch(`${apiUrl}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(user)
+      }));;
+  };
 
+  const deleteUserProfile = (userId) => {
+
+    return getToken().then((token) =>
+      fetch(`${apiUrl}/delete/${userId}`, {
+        method: "PUT",
+        headers: {
+
+          Authorization: `Bearer ${token}`
+        }
+      }));;
+  };
 
 
 
 
   return (
-    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getToken, userProfile, activeUser, getAllUserProfiles, allUserProfiles, getUserProfileById, singleUserProfile }}>
+    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getToken, userProfile, activeUser, getAllUserProfiles, allUserProfiles, getUserProfileById, singleUserProfile, editUserProfile, deleteUserProfile }}>
       {isFirebaseReady
         ? props.children
         : <Spinner className="app-spinner dark" />}

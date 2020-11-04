@@ -78,6 +78,7 @@ CREATE TABLE [UserProfile] (
   [Email] nvarchar(555) NOT NULL,
   [PrimaryFocusId] integer NOT NULL,
   [Description] text NOT NULL,
+   [IsDeleted] integer NOT NULL DEFAULT 0,
   
   CONSTRAINT UQ_FirebaseUserId UNIQUE(FirebaseUserId),
   CONSTRAINT [FK_UserProfile_PrimaryFocus] FOREIGN KEY ([PrimaryFocusId]) REFERENCES [PrimaryFocus] ([Id])

@@ -3,6 +3,7 @@ using System;
 using Fullstack_capstone.Models;
 using Fullstack_capstone.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace Fullstack_capstone.Controllers
 {
@@ -12,9 +13,11 @@ namespace Fullstack_capstone.Controllers
     public class UserProfileController : ControllerBase
     {
         private readonly IUserProfileRepository _userProfileRepository;
-        public UserProfileController(IUserProfileRepository userProfileRepository)
+        private readonly IArtPostRepository _artPostRepository;
+        public UserProfileController(IUserProfileRepository userProfileRepository, IArtPostRepository artPostRepository)
         {
             _userProfileRepository = userProfileRepository;
+            _artPostRepository = artPostRepository;
         }
 
         [HttpGet("{firebaseUserId}")]
@@ -51,7 +54,24 @@ namespace Fullstack_capstone.Controllers
             return Ok(_userProfileRepository.GetUserProfileById(id));
         }
 
-       
+        [HttpPut]
+        public IActionResult EditUserProfile(UserProfile userProfile)
+        {
+            _userProfileRepository.UpdateUserProfile(userProfile);
+            return Ok();
+        }
+
+        [HttpPut("delete/{id}")]
+        public IActionResult DeleteUserProfileAndPosts(int id)
+        {
+           List<ArtPost> artPosts = _artPostRepository.GetAllArtPostsByUser(id);
+            _userProfileRepository.DeleteUserProfile(id);
+            foreach(ArtPost artPost in artPosts)
+            {
+                _artPostRepository.DeleteArtPost(artPost.Id);
+            }
+            return Ok();
+        }
        
     }
 }
