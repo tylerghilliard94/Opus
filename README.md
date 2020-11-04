@@ -10,7 +10,10 @@
 2. cd into client
 3. `npm install` to install React.js and the necessary packages
 4. Load up the server side on Visual Studio.
-5. Run .
+5. Run DB_Create SQl to create the database.
+6. Run the DB_Root SQL to populate the database.
+7. Run the server side application.
+8. Npm start inside of client.
 
 ### Using Opus
 
