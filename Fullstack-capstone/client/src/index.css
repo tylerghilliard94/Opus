@@ -13,14 +13,19 @@ code {
 }
 
 .postDetailsImg{
-  width: 60em;
+  width: 150%;
   height: auto;
+  margin-left: -20%;
 }
 
 
 .userProfileImg{
-  width: 15em;
-  height: auto;
+  width:  200px;
+  height:200px;
+  margin-left: 18%;
+  margin-top: 5%;
+  border-radius: 50%;
+  border: 5px solid #a4ffbb ;
 }
 .carouselImg{
   

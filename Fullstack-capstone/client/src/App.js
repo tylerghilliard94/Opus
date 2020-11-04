@@ -11,6 +11,7 @@ import { LikeProvider } from './providers/LikeProvider';
 import { FollowingProvider } from './providers/FollowingProvider';
 import { FavoriteProvider } from './providers/FavoriteProvider';
 import { CommentProvider } from './providers/CommentProvider';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 //"object undefined" error on browser if you do not include the provider in App.js

@@ -11,21 +11,27 @@ import {
 import { ArtPostContext } from '../providers/ArtPostProvider';
 import { FollowingContext } from '../providers/FollowingProvider';
 import { Link } from "react-router-dom"
+import "./Home.css"
 let items = [
 
 ];
 
 const HomeCarousel = (props) => {
+
     const [activeIndex, setActiveIndex] = useState(0);
     const [animating, setAnimating] = useState(false);
     const { getAllArtPosts, artPosts, getAllRecommendedArtPosts } = useContext(ArtPostContext)
     const { getFollowing, following } = useContext(FollowingContext)
-    const [refresh, setRefresh] = useState(0)
+    const [counter, SetCounter] = useState(0)
     const [isLoading, setIsLoading] = useState(false)
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
     useEffect(() => {
 
         getFollowing(sessionStorage.userProfileId)
         getAllArtPosts();
+
     }, [])
 
     useEffect(() => {
@@ -57,7 +63,16 @@ const HomeCarousel = (props) => {
             getAllRecommendedArtPosts(sessionStorage.userProfileId)
 
         }
-        setIsLoading(!isLoading)
+
+
+        if (counter == 0) {
+            setIsLoading(true)
+            SetCounter(1)
+        }
+        else {
+            sleep(300).then(() => setIsLoading(false))
+        }
+
     }, [following])
 
     const next = () => {
@@ -84,19 +99,25 @@ const HomeCarousel = (props) => {
                 onExited={() => setAnimating(false)}
                 key={item.src}
             >
-                <CarouselCaption captionText={item.caption} captionHeader={item.altText} />
-                <Link to={`/details/${item.id}`}><img className="carouselImg" src={item.src} alt={item.altText} /></Link>
+                <CarouselCaption className="CarouselText" captionText={item.caption} captionHeader={item.altText} />
+                <Link to={`/details/${item.id}`}><img style={{
+                    flex: 1,
+                    width: 800,
+                    height: 1025,
+                    resizeMode: 'contain'
+                }} className="carouselImg" src={item.src} alt={item.altText} /></Link>
 
             </CarouselItem>
         );
     });
     if (isLoading) {
-        return <Spinner animation="border" role="status">
+        return <div className="HomeContainer"><Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>
-        </Spinner>
+        </Spinner></div>
     }
     return (
         <Carousel
+            className="Carousel"
             activeIndex={activeIndex}
             next={next}
             previous={previous}

@@ -1,0 +1,127 @@
+.UserProfileContainer{
+    background-color: #1d1d1d;
+    color: #ececec;
+    min-height: 63.8em;
+}
+
+.ArtPostList{
+    margin-top: 5%;
+    margin-left: 4%;
+}
+
+.UserProfileDisplayName{
+    margin-top: 10%;
+}
+
+.UserProfileFullName{
+    margin-top: 6%;
+}
+
+.UserProfileDescription{
+    margin-top: 15%;
+}
+
+.wrapperProfile
+{
+	padding-bottom: 2%;
+}
+
+.dividerProfile
+{
+	position: relative;
+	margin-top: 4%;
+	height: 1px;
+}
+
+.UserProfileEditRow{
+    margin-top: 10%;
+    margin-bottom: 5%;
+    
+}
+
+.UserProfileFullNameLabel{
+    margin-left: 10%;
+}
+
+.UserProfileEditButton{
+    background-color: #a4ffbb !important;
+    color: #343a40 !important;
+    font-weight: bold !important;
+}
+
+.UserProfileAddPostButton{
+    background-color: #a4ffbb !important;
+    color: #343a40 !important;
+    font-weight: bold !important;
+}
+
+.UserProfileAvatar{
+    margin-left: 10%;
+}
+
+.EditUserProfile{
+    margin-left: 19%;
+    width: 60%;
+    background-color: #343a40 !important;
+    margin-top: 10%;
+    
+}
+.UploadPictureButtonUserProfile{
+    margin-top: 0%;
+    margin-left: 19.54% !important;
+    background-color: #a4ffbb !important;
+    color: #343a40 !important;
+    font-weight: bold !important;
+}
+
+.PrimaryFocusUserProfile{
+    margin-left: 5.5%;
+    margin-right: 4%;
+}
+
+.RegisterFullNameLabel{
+    margin-left: 10%;
+}
+
+.RegisterDisplayNameLabel{
+    margin-left: 7.2%
+}
+
+.RegisterDescriptionLabel{
+    margin-left: 9%;
+}
+
+.DeleteProfileButton{
+    margin-top: 190%;
+   
+}
+
+.SaveButtonEdit{
+    margin-left: 10%;
+    margin-top: 10%;
+    
+}
+
+.CancelButtonEdit{
+    margin-left: 24%;
+    margin-top: 10%;
+}
+
+.SaveButton{
+    background-color: #a4ffbb !important;
+    color: #343a40 !important;
+    font-weight: bold !important;
+}
+
+.EditUserProfileTitle{
+    margin-left: 50%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.EditUserProfileContainer{
+    background-color: #1d1d1d;
+    background-color: #1d1d1d;
+    color: #ececec;
+    min-height: 63.8em;
+}

@@ -55,7 +55,7 @@ export default function Favorites(props) {
     return (
         <>
 
-            {like.userProfileId == sessionStorage.userProfileId && like.postId == artPost.id ? <Button onClick={handleRemoveLike}>Dislike</Button> : <Button onClick={handleLike}>Like</Button>}<p>{artPost.likes}</p>
+            {like.userProfileId == sessionStorage.userProfileId && like.postId == artPost.id ? <Col className="LikeButton" sm={3}><Button onClick={handleRemoveLike}>Dislike</Button></Col> : <Col className="LikeButton" sm={3}><Button className="SelectButton" onClick={handleLike}>Like</Button></Col>}<Col className="LikeCounter" sm={1}><h5 className="TotalLikes">{artPost.likes}</h5></Col>
         </>
     )
 

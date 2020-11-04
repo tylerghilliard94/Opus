@@ -74,48 +74,50 @@ export default function Explore() {
     }
     return (
         <>
-            <Row>
-                <Col sm={2}>
+            <div className="ExploreContainer">
+                <Row className="ExploreRow">
+                    <Col sm={2}>
 
-                    <CategoryList latestSwitch={latestSwitch} trendingSwitch={trendingSwitch} category={category} artType={artType} setCategory={setCategory} setArtType={setArtType} search={search} />
-                </Col>
-                <Col>
-                    <Row>
+                        <CategoryList latestSwitch={latestSwitch} trendingSwitch={trendingSwitch} category={category} artType={artType} setCategory={setCategory} setArtType={setArtType} search={search} />
+                    </Col>
+                    <Col>
+                        <Row className="Filter">
 
-                        {trendingSwitch == false ?
-                            <Button onClick={handleTrending}>
-                                Trending
-            </Button> : <Button color="primary" >
-                                Trending
+                            {trendingSwitch == false ?
+                                <Button className="NonSelectedButton" onClick={handleTrending}>
+                                    Trending
+            </Button> : <Button className="SelectedButton Filter" >
+                                    Trending
             </Button>}
-                        {latestSwitch == false ?
-                            <Button onClick={handleLatest}>
-                                Latest
-            </Button> : <Button color="primary" >
-                                Latest
+                            {latestSwitch == false ?
+                                <Button className="NonSelectedButton" onClick={handleLatest}>
+                                    Latest
+            </Button> : <Button className="SelectedButton Filter" >
+                                    Latest
             </Button>}
 
 
-                        {following.length == 0 ? null : followingSwitch == false ?
-                            <Button onClick={handleFollowing}>
-                                Following
-            </Button> : <Button color="primary" >
-                                Following
+                            {following.length == 0 ? null : followingSwitch == false ?
+                                <Button className="NonSelectedButton" onClick={handleFollowing}>
+                                    Following
+            </Button> : <Button className="SelectedButton Filter" >
+                                    Following
             </Button>}
-                        {favorites.length == 0 ? null : favoriteSwitch == false ?
-                            <Button onClick={handleFavorites}>
-                                Favorites
-            </Button> : <Button color="primary" >
-                                Favorites
+                            {favorites.length == 0 ? null : favoriteSwitch == false ?
+                                <Button className="NonSelectedButton" onClick={handleFavorites}>
+                                    Favorites
+            </Button> : <Button className="SelectedButton Filter" >
+                                    Favorites
             </Button>}
-                    </Row>
-                    {isLoading ? <Spinner animation="border" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </Spinner> : <ArtPostList />}
+                        </Row>
+                        {isLoading ? <Spinner animation="border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </Spinner> : <ArtPostList />}
 
 
-                </Col>
-            </Row>
+                    </Col>
+                </Row>
+            </div>
         </>
 
 

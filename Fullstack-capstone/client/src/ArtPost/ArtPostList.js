@@ -25,11 +25,13 @@ export default function ArtPostList() {
 
     return (
         <>
-            <Row>
-                {artPosts.length != 0 ? artPosts.map(post => {
-                    return <ArtPost post={post} />
-                }) : null}
-            </Row>
+            <div className="ArtContainer">
+                <Row>
+                    {artPosts.length != 0 ? artPosts.map(post => {
+                        return <ArtPost post={post} />
+                    }) : null}
+                </Row>
+            </div>
         </>
 
     )

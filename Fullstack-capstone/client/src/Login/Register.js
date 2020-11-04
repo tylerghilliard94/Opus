@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Card, Row } from 'reactstrap';
 import { useHistory } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import { PrimaryFocusContext } from "../providers/PrimaryFocusProvider";
@@ -60,62 +60,83 @@ export default function Register() {
   }
 
   return (
-    <Form onSubmit={registerClick}>
-      <fieldset>
-        <FormGroup>
-          <Label htmlFor="firstName">Full Name</Label>
-          <Input id="fullName" type="text" onChange={e => setFullName(e.target.value)} />
-        </FormGroup>
+    <div className="LoginContainer">
+      <Card className="RegistrationCard">
+        <Form onSubmit={registerClick}>
+          <img className="LoginLogo" src="https://res.cloudinary.com/dgllrw1m3/image/upload/v1604287659/Opus%20Logo%20color%20fix.png" />
+          <h2 className="LoginTitle">Register New User</h2>
+          <fieldset>
+            <FormGroup>
+              <Row>
+                <Label className="FullNameTitle" htmlFor="firstName">Full Name</Label>
+                <Input id="fullName" className="RegisterFullName" type="text" onChange={e => setFullName(e.target.value)} />
+              </Row>
+            </FormGroup>
 
-        <FormGroup>
-          <Label htmlFor="displayName">Display Name</Label>
-          <Input id="displayName" type="text" onChange={e => setDisplayName(e.target.value)} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="email">Email</Label>
-          <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
-        </FormGroup>
-        <FormGroup>
-          <div>
-            <Button onClick={showWidget}>Upload Photo</Button> <p>{imageName}</p>
-          </div>
-        </FormGroup>
-        <FormGroup>
-          <Label for="primaryfocus">Primary Focus</Label>
-          {primaryFoci != undefined ?
-            <select
-              className="newUser"
-              onChange={e => setPrimaryFocusId(parseInt(e.target.value))}
-              defaultValue={1}
-              id="primaryFocusId"
+            <FormGroup>
+              <Row>
+                <Label className="DisplayNameTitle" htmlFor="displayName">Display Name</Label>
+                <Input id="displayName" className="RegisterDisplayName" type="text" onChange={e => setDisplayName(e.target.value)} />
+              </Row>
+            </FormGroup>
+            <FormGroup>
+              <Row>
+                <Label className="LoginEmail" for="email">Email</Label>
+                <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
+              </Row>
+            </FormGroup>
 
-            >
-              {primaryFoci.map(primaryFocus => {
+            <FormGroup>
+              <Row>
+                <Label className="DescriptionTitle" for="description">Description</Label>
+                <Input id="description" className="RegisterDescription" type="text" onChange={e => setDescription(e.target.value)} />
+              </Row>
+            </FormGroup>
+            <FormGroup>
+              <Row>
+                <Label className="LoginPassword" for="password">Password</Label>
+                <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
+              </Row>
+            </FormGroup>
+            <FormGroup>
+              <Row>
+                <Label className="ConfirmPasswordTitle" for="confirmPassword">Confirm Password</Label>
+                <Input className="RegisterConfirmPassword" id="confirmPassword" type="password" onChange={e => setConfirmPassword(e.target.value)} />
+              </Row>
+            </FormGroup>
+            <FormGroup>
+              <div>
+                <Row><Button className="UploadPictureButton" onClick={showWidget}><strong>Upload Photo</strong></Button> <p>{imageName}</p></Row>
+              </div>
+            </FormGroup>
+            <FormGroup>
 
-                return <option key={primaryFocus.id} value={primaryFocus.id}>{primaryFocus.name}</option>
+              <Label className="PrimaryFocusTitle" for="primaryfocus">Primary Focus</Label>
+              {primaryFoci != undefined ?
+                <select
+                  className="RegisterPrimaryFocus"
+
+                  onChange={e => setPrimaryFocusId(parseInt(e.target.value))}
+                  defaultValue={1}
+                  id="primaryFocusId"
+
+                >
+                  {primaryFoci.map(primaryFocus => {
+
+                    return <option key={primaryFocus.id} value={primaryFocus.id}>{primaryFocus.name}</option>
 
 
-              })}
+                  })}
 
-            </select> : null
-          }
-        </FormGroup>
-        <FormGroup>
-          <Label for="description">Description</Label>
-          <Input id="description" type="text" onChange={e => setDescription(e.target.value)} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="password">Password</Label>
-          <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="confirmPassword">Confirm Password</Label>
-          <Input id="confirmPassword" type="password" onChange={e => setConfirmPassword(e.target.value)} />
-        </FormGroup>
-        <FormGroup>
-          <Button>Register</Button>
-        </FormGroup>
-      </fieldset>
-    </Form>
+                </select> : null
+              }
+            </FormGroup>
+            <FormGroup>
+              <Button className="RegisterConfirmButton"><strong>Register</strong></Button>
+            </FormGroup>
+          </fieldset>
+        </Form>
+      </Card>
+    </div>
   );
 }

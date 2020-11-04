@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { NavLink, useHistory, useParams } from "react-router-dom";
 
-import { Button, Row, Col, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Row, Col, Form, FormGroup, Label, Input, Card } from "reactstrap";
 import { ArtPostContext } from "../providers/ArtPostProvider";
 import { LikeContext, LikeProvider } from "../providers/LikeProvider";
 import { UserProfileContext } from "../providers/UserProfileProvider";
@@ -84,79 +84,92 @@ export default function ArtPostAdd() {
 
     return (
         <>
-            <Row sm={8}>
-                <Col>
-                    <Form >
-                        <fieldset>
+            <div className="EditUserProfileContainer">
+                <Row sm={8}>
+                    <Card className="EditUserProfile">
 
-                            <FormGroup>
-                                <Label htmlFor="title">Title</Label>
-                                <Input id="Title" defaultValue={""} type="text" onChange={handleChange} />
-                            </FormGroup>
+                        <Col>
+                            <h2 className="TitleAddForm">Add Post</h2>
+                            <Form >
+                                <fieldset>
 
-                            <FormGroup>
-                                <Label htmlFor="description">Description</Label>
-                                <textarea id="Description" defaultValue="" type="text" onChange={handleChange} />
-                            </FormGroup>
-                            <FormGroup>
-                                <div>
-                                    <Button onClick={showWidget}>Upload Photo</Button> <p>{imageName}</p>
-                                </div>
-                            </FormGroup>
+                                    <FormGroup>
+                                        <Row>
+                                            <Label className="PostTitleLabel" htmlFor="title">Title</Label>
+                                            <Input className="PostTitleEdit" id="Title" defaultValue={""} type="text" onChange={handleChange} />
+                                        </Row>
+                                    </FormGroup>
 
-                            <FormGroup>
-                                <Label for="category">Category</Label>
-                                {categories != undefined ?
-                                    <select
-                                        className="editArtPost"
-                                        onChange={handleChange}
-                                        defaultValue={1}
-                                        id="CategoryId"
+                                    <FormGroup>
+                                        <Row>
+                                            <Label className="PostDescriptionLabel PostLabel" htmlFor="description">Description</Label>
+                                            <textarea className="PostDescriptionEdit" id="Description" defaultValue="" type="text" onChange={handleChange} />
+                                        </Row>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <div>
+                                            <Button className="UploadPostPicture" onClick={showWidget}>Upload Photo</Button> <p>{imageName}</p>
+                                        </div>
+                                    </FormGroup>
 
-                                    >
+                                    <FormGroup>
+                                        <Label className="PostLabelDropdown" for="category">Category</Label>
+                                        {categories != undefined ?
+                                            <select
+                                                className="PostCategory"
+                                                onChange={handleChange}
+                                                defaultValue={1}
+                                                id="CategoryId"
 
-                                        {categories.map(category => {
+                                            >
 
-                                            return <option key={category.id} value={category.id}>{category.name}</option>
+                                                {categories.map(category => {
+
+                                                    return <option key={category.id} value={category.id}>{category.name}</option>
 
 
-                                        })}
+                                                })}
 
-                                    </select> : null
-                                }
-                            </FormGroup>
+                                            </select> : null
+                                        }
+                                    </FormGroup>
 
-                            <FormGroup>
-                                <Label for="artType">Art Type</Label>
+                                    <FormGroup>
+                                        <Label className="PostLabelDropdownArtType" for="artType">Art Type</Label>
 
-                                <select
-                                    className="editPost"
-                                    onChange={handleChange}
-                                    defaultValue={1}
-                                    id="ArtTypeId"
+                                        <select
+                                            className="PostArtType"
+                                            onChange={handleChange}
+                                            defaultValue={1}
+                                            id="ArtTypeId"
 
-                                >
+                                        >
 
-                                    <option key={1} value={1}>2D</option>
-                                    <option key={2} value={2}>3D</option>
+                                            <option key={1} value={1}>2D</option>
+                                            <option key={2} value={2}>3D</option>
 
-                                </select>
+                                        </select>
 
-                            </FormGroup>
+                                    </FormGroup>
 
-                            <FormGroup>
-                                <Row>
-                                    <NavLink to={`/profile/${sessionStorage.userProfileId}`}><Button>Cancel</Button></NavLink>
-                                    <Button onClick={handleSave}>Save Post</Button>
+                                    <FormGroup>
+                                        <Row>
 
-                                </Row>
+                                            <NavLink to={`/profile/${sessionStorage.userProfileId}`}><Button className="AddPostCancelButton">Cancel</Button></NavLink>
 
-                            </FormGroup>
-                        </fieldset>
-                    </Form>
-                </Col>
 
-            </Row>
+                                            <Button className="PostSaveEditButton" onClick={handleSave}>Save Post</Button>
+
+                                        </Row>
+
+                                    </FormGroup>
+                                </fieldset>
+                            </Form>
+                        </Col>
+                    </Card>
+
+                </Row>
+            </div>
 
         </>
     )

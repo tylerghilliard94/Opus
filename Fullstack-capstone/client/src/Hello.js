@@ -36,10 +36,10 @@ export default function Hello() {
           top: "50%",
           marginTop: "-0.5rem",
           textAlign: "center",
-        }}>Hello, Good Morning {localActiveUser.DisplayName != undefined ? localActiveUser.DisplayName : localActiveUser.displayName}
+        }}><h1>Hello, Good Morning {localActiveUser.DisplayName != undefined ? localActiveUser.DisplayName : localActiveUser.displayName}</h1>
 
         </div>
-        <Home />
+
       </>
 
     );
@@ -54,12 +54,12 @@ export default function Hello() {
           top: "50%",
           marginTop: "-0.5rem",
           textAlign: "center",
-        }}>Hello, Good Afternoon {localActiveUser.DisplayName != undefined ? localActiveUser.DisplayName : localActiveUser.displayName}
+        }}><h1>Hello, Good Afternoon {localActiveUser.DisplayName != undefined ? localActiveUser.DisplayName : localActiveUser.displayName}</h1>
 
 
 
         </div>
-        <Home />
+
       </>
     );
   }
@@ -73,14 +73,14 @@ export default function Hello() {
           top: "50%",
           marginTop: "-0.5rem",
           textAlign: "center",
-        }}>Hello, Good Evening {localActiveUser.DisplayName != undefined ? localActiveUser.DisplayName : localActiveUser.displayName}
+        }}><h1>Hello, Good Evening {localActiveUser.DisplayName != undefined ? localActiveUser.DisplayName : localActiveUser.displayName}</h1>
 
 
 
 
 
         </div>
-        <Home />
+
       </>
     );
 

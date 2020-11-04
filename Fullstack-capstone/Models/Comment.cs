@@ -17,6 +17,7 @@ namespace Fullstack_capstone.Models
         public int PostId { get; set; }
 
         public DateTime PostDate { get; set; }
+        public string CommentDate { get; set; }
 
         public string Content { get; set; }
     }

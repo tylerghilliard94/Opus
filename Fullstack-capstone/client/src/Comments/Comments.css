@@ -1,0 +1,47 @@
+.AddComment{
+    width: 70%;
+    margin-left: 7.5%;
+    margin-bottom: 5%;
+  
+}
+.AddCommentButton{
+    margin-bottom: 5%;
+}
+
+.CommentTitle{
+    text-align: center;
+    margin-left: 0%;
+    margin-bottom: 5%;
+    margin-top: 5%
+}
+
+.CommentList{
+    margin-left: 0%;
+    width: 20%;
+}
+.CommentContainer{
+    margin-left: -1%;
+    width: 100%;
+}
+.Comment, .CommentEdit {
+    background-color:  #343a40 !important;
+    border: 0px !important;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.CommentDate{
+    margin-left: 65%;
+    color: #ececec91;
+}
+
+.CommentDisplayName{
+    margin-left: 7%;
+    color: #a4ffbb;
+    
+}
+
+textarea{
+    background-color: #343a40 !important;
+    color: #ececec !important;
+}
