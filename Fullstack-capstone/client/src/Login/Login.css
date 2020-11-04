@@ -1,0 +1,79 @@
+
+
+.LoginCard{
+    width: 50%;
+   
+    margin-left: 30em;
+    margin-top: 10em;
+    background-color: #343a40!important;
+    color: #ececec !important;
+    margin-bottom: 10em;
+    
+  }
+
+  .LoginContainer{
+    display: flex;
+    background-image:url("https://res.cloudinary.com/dgllrw1m3/image/upload/v1604288594/background_example_xlwgdh.png");
+    height: 65em;
+    
+  }
+
+  .LoginLogo {
+      width: 30% !important;
+      height: auto;
+      margin-left: 20.7em;
+      margin-top: 2em;
+  }
+
+  .LoginTitle{
+    text-align: center;
+    margin-bottom: .5em;
+  }
+  .LoginSubTitle{
+    text-align: center;
+    margin-bottom: 2em;
+    color: #a4ffbb;
+  }
+
+
+  .LoginEmail{
+    margin-left: 5.7em;
+  }
+
+  .LoginPassword{
+    margin-left: 4em;
+  }
+
+  #email {
+      width: 70%;
+      margin-left: 2.1em;
+      background-color: #6b6d75;
+      border-color: #6b6d75;
+      color: #ececec;
+  }
+
+  #password {
+      width: 70%;
+      margin-left: 2em;
+      background-color: #6b6d75;
+      border-color: #6b6d75;
+      color: #ececec;
+  }
+
+  .LoginButton{
+      margin-left: 28em;
+      background-color: #a4ffbb !important;
+      color: #343a40 !important;
+  }
+
+  .RegisterText{
+      margin-left:24.4em;
+      margin-bottom: 1em !important;
+      padding-bottom: 1em;
+  }
+
+  .RegisterButton{
+      color: #a4ffbb;
+  }
+
+

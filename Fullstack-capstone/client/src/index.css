@@ -30,4 +30,15 @@ code {
   min-height: 100%;
 
 }
+.NavBar{
+  background-color: #545454 !important;
+}
+.HeaderLogo{
+  width: 20%
+}
+
+.exploreTag{
+  padding-left:  -6em;
+}
+
 

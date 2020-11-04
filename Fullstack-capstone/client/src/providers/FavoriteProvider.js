@@ -32,6 +32,7 @@ export function FavoriteProvider(props) {
     };
 
     const getFavorites = (userProfileId) => {
+
         return getToken().then((token) =>
             fetch(`/api/favorites/${userProfileId}`, {
                 method: "GET",

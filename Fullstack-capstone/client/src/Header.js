@@ -21,25 +21,26 @@ export default function Header() {
   return (
     <>
       <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand tag={RRNavLink} to="/">Opus</NavbarBrand>
+        <Navbar className="Navbar" color="dark" dark expand="md">
+          <NavbarBrand className="HeaderLogoTag" tag={RRNavLink} to="/"><img className="HeaderLogo" src="https://res.cloudinary.com/dgllrw1m3/image/upload/v1604287659/Opus%20Logo%20color%20fix.png"></img>Opus</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               { /* When isLoggedIn === true, we will render the Home link */}
 
 
-              {isLoggedIn &&
-                <NavItem>
-                  <NavLink tag={RRNavLink} to={`/explore`}>Explore</NavLink>
-                </NavItem>
-              }
 
 
 
             </Nav>
 
             <Nav navbar>
+              {isLoggedIn &&
+                <NavItem className="ExploreTag">
+                  <NavLink tag={RRNavLink} to={`/explore`}>Explore</NavLink>
+                </NavItem>
+              }
+
               {isLoggedIn &&
                 <NavItem>
                   <NavLink tag={RRNavLink} to={`/profile/${sessionStorage.userProfileId}`}>Profile</NavLink>
