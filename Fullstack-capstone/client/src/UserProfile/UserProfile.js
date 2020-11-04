@@ -13,6 +13,7 @@ import CommentList from "../Comments/CommentList"
 import { CategoryContext } from "../providers/CategoryProvider";
 import { propTypes } from "react-resize-image";
 import ArtPostList from "../ArtPost/ArtPostList"
+import "./UserProfile.css"
 
 
 
@@ -68,34 +69,49 @@ export default function PostDetails() {
     }
     return (
         <>
-            <Row sm={8}>
+            <div className="UserProfileContainer">
+                <Row sm={8}>
 
-                <Col>
-                    <Row><img class="userProfileImg" src={singleUserProfile.image}></img></Row>
+                    <Col className="UserProfileAvatar" sm={2}>
+                        <Row><img class="userProfileImg " src={singleUserProfile.image}></img></Row>
 
-                </Col>
-                <Col>
-                    <Row><h2>{singleUserProfile.displayName}</h2></Row>
-                    <Row><h2>{singleUserProfile.fullName}</h2></Row>
-                    {singleUserProfile != undefined ? <Row><h2>{singleUserProfile.primaryFocus.name} Focused</h2></Row> : null}
-
-
-
-
-                </Col>
-                <Col>
-                    {singleUserProfile.id == sessionStorage.userProfileId ? <NavLink to={"user/edit"}><Button>Edit</Button></NavLink> : null}
-                    <Row><p>{singleUserProfile.description}</p></Row>
-                    {singleUserProfile.id != sessionStorage.userProfileId ? <ProfileFollowing setRefresh={setRefresh} refresh={refresh} /> : null}
-                    {singleUserProfile.id == sessionStorage.userProfileId ? <NavLink to={"post/add"}><Button>Add Art Post</Button></NavLink> : null}
-                </Col>
+                    </Col>
+                    <Col sm={2}>
+                        <Row><h2 className="UserProfileDisplayName">{singleUserProfile.displayName}</h2></Row>
+                        <Row><h3 className="UserProfileFullName">{singleUserProfile.fullName}</h3></Row>
+                        {singleUserProfile != undefined ? <Row><h5>{singleUserProfile.primaryFocus.name} Focused</h5></Row> : null}
 
 
-            </Row>
-            <Row>
-                <ArtPostList />
 
-            </Row>
+
+                    </Col>
+                    <Col sm={4}>
+
+                        <Row><p className="UserProfileDescription">{singleUserProfile.description}</p></Row>
+                    </Col>
+                    <Col>
+                        <Row className="UserProfileEditRow">
+                            {singleUserProfile.id == sessionStorage.userProfileId ? <NavLink to={"user/edit"}><Button className="UserProfileEditButton">Edit</Button></NavLink> : null}
+
+                            {singleUserProfile.id != sessionStorage.userProfileId ? <ProfileFollowing setRefresh={setRefresh} refresh={refresh} /> : null}
+                        </Row>
+                        <Row>
+                            {singleUserProfile.id == sessionStorage.userProfileId ? <NavLink to={"post/add"}><Button className="UserProfileAddPostButton">Add Art Post</Button></NavLink> : null}
+                        </Row>
+                    </Col>
+
+
+                </Row>
+                <div class="wrapperProfile">
+                    <div class="dividerProfile div-transparent div-arrow-down"></div>
+                </div>
+                <Row >
+                    <Col className="ArtPostList">
+                        <ArtPostList />
+                    </Col>
+
+                </Row>
+            </div>
         </>
 
 

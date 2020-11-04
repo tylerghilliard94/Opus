@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import Login from "../Login/Login";
 import Register from "../Login/Register";
-import Hello from "../Hello";
+import Home from "../Home/Home";
 import Explore from "../Explore/Explore";
 import ArtPostDetails from "../ArtPost/ArtPostDetails"
 import UserProfile from "../UserProfile/UserProfile"
@@ -19,7 +19,7 @@ export default function ApplicationViews(props) {
     <main>
       <Switch>
         <Route path="/" exact>
-          {isLoggedIn ? <Hello /> : <Redirect to="/login" />}
+          {isLoggedIn ? <Home /> : <Redirect to="/login" />}
         </Route>
         <Route path="/explore" exact>
           {isLoggedIn ? <Explore /> : <Redirect to="/login" />}

@@ -52,7 +52,7 @@ export default function Favorites(props) {
                 ? null :
                 favorite.userProfileId == sessionStorage.userProfileId && favorite.postId == artPost.id
                     ? <Button onClick={handleUnFavorite}>Remove Favorite</Button>
-                    : <Button onClick={handleFavorite}>Favorite</Button>}
+                    : <Button className="SelectButton FavoriteButton" onClick={handleFavorite}>Favorite</Button>}
         </>
     )
 

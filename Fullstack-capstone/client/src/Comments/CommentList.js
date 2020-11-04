@@ -56,6 +56,7 @@ export default function CommentList(props) {
         <>
             <div className="CommentContainer">
                 <CommentAdd setAddRefresh={setAddRefresh} addRefresh={addRefresh} />
+
                 <Col className="CommentList">
                     {comments.length != 0 ? comments.map(artPostComment => (
 

@@ -54,9 +54,9 @@ export default function CommentAdd(props) {
             <Row><Col className="CommentTitle"><h3>Comments</h3> </Col></Row>
             <Row>
 
-                <textarea className="AddComment" required id="Content" defaultValue="" onChange={handleChange}></textarea>
+                <textarea className="AddComment" placeholder="Type a comment here..." required id="Content" defaultValue="" onChange={handleChange}></textarea>
 
-                <Button className="AddCommentButton" onClick={handleSaveComment}>Add New Comment</Button>
+                <Button className="AddCommentButton SelectButton" onClick={handleSaveComment}>Post</Button>
             </Row>
         </>
     )

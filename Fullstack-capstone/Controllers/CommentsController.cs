@@ -3,6 +3,7 @@ using System;
 using Fullstack_capstone.Models;
 using Fullstack_capstone.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace Fullstack_capstone.Controllers
 {
@@ -33,7 +34,12 @@ namespace Fullstack_capstone.Controllers
         [HttpGet("all/{id}")]
         public IActionResult Get(int id)
         {
-            return Ok(_commentsRepository.GetAllComments(id));
+            List<Comment> comments = _commentsRepository.GetAllComments(id);
+            foreach(Comment comment in comments)
+            {
+                comment.CommentDate = comment.PostDate.ToShortDateString();
+            }
+            return Ok(comments);
         }
 
         //Get User by User.Id

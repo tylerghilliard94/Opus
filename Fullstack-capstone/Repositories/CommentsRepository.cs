@@ -63,6 +63,7 @@ namespace Fullstack_capstone.Repositories
 
                             Content = DbUtils.GetString(reader, "Content"),
                             PostDate = DbUtils.GetDateTime(reader, "PostDate"),
+                            
                             UserProfile = new UserProfile()
                             {
                                 DisplayName = DbUtils.GetString(reader, "DisplayName"),

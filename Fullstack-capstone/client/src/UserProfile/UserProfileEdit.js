@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { NavLink, useHistory, useParams } from "react-router-dom";
 
-import { Button, Row, Col, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Row, Col, Form, FormGroup, Label, Input, Card } from "reactstrap";
 
 import { LikeContext, LikeProvider } from "../providers/LikeProvider";
 import { UserProfileContext } from "../providers/UserProfileProvider";
@@ -108,69 +108,84 @@ export default function UserProfileEdit() {
 
     return (
         <>
+            <div className="EditUserProfileContainer">
+                <Row sm={8}>
+                    <Card className="EditUserProfile">
+                        <Row>
+                            <Col sm={10}>
+                                <h2 className="EditUserProfileTitle">Edit {localUser.DisplayName}'s Profile</h2>
+                                <Form >
+                                    <fieldset>
 
-            <Row sm={8}>
-                <Col>
-                    <Form >
-                        <fieldset>
+                                        <FormGroup>
+                                            <Row>
+                                                <Label className="RegisterFullNameLabel" htmlFor="fullName">Full Name</Label>
+                                                <Input className="RegisterFullName" id="FullName" value={localUser.FullName} type="text" onChange={handleChange} />
+                                            </Row>
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Row>
+                                                <Label className="RegisterDisplayNameLabel" htmlFor="displayName">Display Name</Label>
+                                                <Input className="RegisterDisplayName" id="DisplayName" value={localUser.DisplayName} type="text" onChange={handleChange} />
+                                            </Row>
+                                        </FormGroup>
 
-                            <FormGroup>
-                                <Label htmlFor="fullName">Full Name</Label>
-                                <Input id="FullName" value={localUser.FullName} type="text" onChange={handleChange} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor="displayName">Display Name</Label>
-                                <Input id="DisplayName" value={localUser.DisplayName} type="text" onChange={handleChange} />
-                            </FormGroup>
+                                        <FormGroup>
+                                            <Row>
+                                                <Label className="RegisterDescriptionLabel" htmlFor="description">Description</Label>
+                                                <textarea className="RegisterDescription" id="Description" defaultValue={localUser.Description} type="text" onChange={handleChange} />
+                                            </Row>
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <div>
+                                                <Button className="UploadPictureButtonUserProfile" onClick={showWidget}>Upload Photo</Button> <p>{imageName}</p>
+                                            </div>
+                                        </FormGroup>
 
-                            <FormGroup>
-                                <Label htmlFor="description">Description</Label>
-                                <textarea id="Description" defaultValue={localUser.Description} type="text" onChange={handleChange} />
-                            </FormGroup>
-                            <FormGroup>
-                                <div>
-                                    <Button onClick={showWidget}>Upload Photo</Button> <p>{imageName}</p>
-                                </div>
-                            </FormGroup>
+                                        <FormGroup>
+                                            <Label className="PrimaryFocusUserProfile" for="category">Primary Focus</Label>
+                                            {primaryFoci != undefined ?
+                                                <select
+                                                    className="PostCategory"
+                                                    onChange={handleChange}
+                                                    defaultValue={localUser.primaryFocusID}
+                                                    id="PrimaryFocusId"
 
-                            <FormGroup>
-                                <Label for="category">Primary Focus</Label>
-                                {primaryFoci != undefined ?
-                                    <select
-                                        className="primaryFocus"
-                                        onChange={handleChange}
-                                        defaultValue={localUser.primaryFocusID}
-                                        id="PrimaryFocusId"
+                                                >
+                                                    {primaryFoci.map(primaryFocus => {
 
-                                    >
-                                        {primaryFoci.map(primaryFocus => {
-
-                                            return <option key={primaryFocus.id} value={primaryFocus.id}>{primaryFocus.name}</option>
-
-
-                                        })}
-
-                                    </select> : null
-                                }
-                            </FormGroup>
-
-
-
-                            <FormGroup>
-                                <Row>
-                                    <NavLink to={`/profile/${sessionStorage.userProfileId}`}><Button>Cancel</Button></NavLink>
-                                    <Button onClick={handleSaveEdit}>Save Edit</Button>
-                                </Row>
-                            </FormGroup>
-                        </fieldset>
-                    </Form>
-                </Col>
-                <Col>
-                    <Button onClick={handleDelete}>Delete Profile</Button>
-                </Col>
-            </Row>
+                                                        return <option key={primaryFocus.id} value={primaryFocus.id}>{primaryFocus.name}</option>
 
 
+                                                    })}
+
+                                                </select> : null
+                                            }
+                                        </FormGroup>
+
+
+
+                                        <FormGroup>
+                                            <Row>
+                                                <Col className="CancelButtonEdit">
+                                                    <NavLink to={`/profile/${sessionStorage.userProfileId}`}><Button>Cancel</Button></NavLink></Col>
+                                                <Col className="SaveButtonEdit">
+                                                    <Button className="SaveButton" onClick={handleSaveEdit}>Save Edit</Button>
+                                                </Col>
+                                            </Row>
+                                        </FormGroup>
+                                    </fieldset>
+                                </Form>
+
+                            </Col>
+                            <Col>
+                                <Button className="DeleteProfileButton" onClick={handleDelete}>Delete Profile</Button>
+                            </Col>
+                        </Row>
+                    </Card>
+                </Row>
+
+            </div>
 
         </>
     )

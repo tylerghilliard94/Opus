@@ -2,16 +2,17 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { NavLink, useHistory, useParams } from "react-router-dom";
 
-import { Button, Row, Col, Form, FormGroup, Label, Input, Spinner } from "reactstrap";
+import { Button, Row, Col, Form, FormGroup, Label, Input, Spinner, Card } from "reactstrap";
+
 import { ArtPostContext } from "../providers/ArtPostProvider";
-import { LikeContext, LikeProvider } from "../providers/LikeProvider";
+
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import Following from "../Following/Following"
 import Likes from "../Likes/Likes"
 import Favorites from "../Favorites/Favorites"
 import CommentList from "../Comments/CommentList"
 import { CategoryContext } from "../providers/CategoryProvider";
-import { propTypes } from "react-resize-image";
+
 
 
 
@@ -141,76 +142,91 @@ export default function PostDetails() {
             <>
                 <div className="DetailsContainer">
                     <Row sm={8}>
-                        <Col>
-                            <Form >
-                                <fieldset>
+                        <Col sm={5} className="PostDetails">
+                            <Card className="PostEditCard">
+                                <Form >
+                                    <fieldset>
+                                        <h2 className="EditPostLabel">Edit <i>{localArtPost.Title}</i></h2>
+                                        <FormGroup>
+                                            <Row>
+                                                <Label className="PostTitleLabel" htmlFor="title">Title</Label>
+                                                <Input className="PostTitleEdit" id="Title" value={localArtPost.Title} type="text" onChange={handleChange} />
+                                            </Row>
+                                        </FormGroup>
 
-                                    <FormGroup>
-                                        <Label htmlFor="title">Title</Label>
-                                        <Input id="Title" value={localArtPost.Title} type="text" onChange={handleChange} />
-                                    </FormGroup>
+                                        <FormGroup>
+                                            <Label className="PostDescriptionLabel" htmlFor="description">Description</Label>
+                                            <textarea className="PostDescriptionEdit" id="Description" defaultValue={localArtPost.Description} type="text" onChange={handleChange} />
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <div>
+                                                <Button className="UploadPictureButtonPost" onClick={showWidget}>Upload Photo</Button> <p>{imageName}</p>
+                                            </div>
+                                        </FormGroup>
 
-                                    <FormGroup>
-                                        <Label htmlFor="description">Description</Label>
-                                        <textarea id="Description" defaultValue={localArtPost.Description} type="text" onChange={handleChange} />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <div>
-                                            <Button onClick={showWidget}>Upload Photo</Button> <p>{imageName}</p>
-                                        </div>
-                                    </FormGroup>
+                                        <FormGroup>
+                                            <Label className="PostCategoryEdit" for="category">Category</Label>
+                                            {categories != undefined ?
+                                                <select
+                                                    className="PostCategory"
+                                                    onChange={handleChange}
+                                                    defaultValue={artPost.categoryId}
+                                                    id="CategoryId"
 
-                                    <FormGroup>
-                                        <Label for="category">Category</Label>
-                                        {categories != undefined ?
+                                                >
+
+                                                    {categories.map(category => {
+
+                                                        return <option key={category.id} value={category.id}>{category.name}</option>
+
+
+                                                    })}
+
+                                                </select> : null
+                                            }
+                                        </FormGroup>
+
+                                        <FormGroup>
+                                            <Label className="PostArtTypeEdit" for="artType">Art Type</Label>
+
                                             <select
-                                                className="editArtPost"
+                                                className="PostArtType"
                                                 onChange={handleChange}
-                                                defaultValue={artPost.categoryId}
-                                                id="CategoryId"
+                                                defaultValue={artPost.artTypeId}
+                                                id="ArtTypeId"
 
                                             >
 
-                                                {categories.map(category => {
+                                                <option key={1} value={1}>2D</option>
+                                                <option key={2} value={2}>3D</option>
 
-                                                    return <option key={category.id} value={category.id}>{category.name}</option>
+                                            </select>
 
+                                        </FormGroup>
 
-                                                })}
-
-                                            </select> : null
-                                        }
-                                    </FormGroup>
-
-                                    <FormGroup>
-                                        <Label for="artType">Art Type</Label>
-
-                                        <select
-                                            className="editPost"
-                                            onChange={handleChange}
-                                            defaultValue={artPost.artTypeId}
-                                            id="ArtTypeId"
-
-                                        >
-
-                                            <option key={1} value={1}>2D</option>
-                                            <option key={2} value={2}>3D</option>
-
-                                        </select>
-
-                                    </FormGroup>
-
-                                    <FormGroup>
-                                        <Button onClick={handleCloseEdit}>Save Edit</Button>
-                                    </FormGroup>
-                                </fieldset>
-                            </Form>
+                                        <FormGroup>
+                                            <Button className="PostSaveEditButton" onClick={handleCloseEdit}>Save Edit</Button>
+                                        </FormGroup>
+                                    </fieldset>
+                                </Form>
+                            </Card>
                         </Col>
-                        <Col>
-                            <Row><h2>{singleUserProfile.displayName}</h2></Row>
+                        <Col sm={2} className="ArtistDetails">
+
                             <Row><img class="userProfileImg" src={singleUserProfile.image}></img></Row>
-                            <Row><p>{singleUserProfile.description}</p></Row>
-                            <Row><Following setRefresh={setRefresh} /> <NavLink to={`/profile/${singleUserProfile.id}`}><Button>Details</Button></NavLink></Row>
+                            <Row><Col className="UserDisplayName"><h2>{singleUserProfile.displayName}</h2></Col></Row>
+                            <Row><Col className="UserDescription"><p className="UserDescription">{singleUserProfile.description}</p></Col></Row>
+                            <Row><Col className="Following"><Following setRefresh={setRefresh} /></Col> <Col><NavLink to={`/profile/${singleUserProfile.id}`}><Button>Details</Button></NavLink></Col></Row>
+                            <div class="wrapper">
+                                <div class="divider div-transparent div-arrow-down"></div>
+                            </div>
+                            <Row ><Col><h2 className="PostTitle">{artPost.title}</h2></Col></Row>
+                            <Col className="PostDesc"><p >{artPost.description}</p></Col>
+                            <Row><Likes setRefresh={setRefresh} />{sessionStorage.userProfileId == singleUserProfile.id ? <Row><Col ><Button className="EditPostButton" id={artPost.id} onClick={handleOpenEdit}>Edit</Button></Col> <Col><Button className="EditPostButton" id={artPost.id} onClick={handleDelete}>Delete</Button></Col></Row> : <Col className="Favorite" sm={7}><Favorites setRefresh={setRefresh} /></Col>}</Row>
+                            <div class="wrapper">
+                                <div class="divider div-transparent div-arrow-down"></div>
+                            </div>
+                            <CommentList refresh={refresh} setRefresh={setRefresh} />
 
                         </Col>
                     </Row>
@@ -227,18 +243,28 @@ export default function PostDetails() {
                 <Row sm={8}>
                     <Col sm={5} className="PostDetails">
                         <Row><img class="postDetailsImg" src={artPost.image}></img></Row>
-                        <Row ><Col><h2 className="PostTitle">{artPost.title}</h2></Col></Row>
-                        <Row><Col className="PostDesc"><p >{artPost.description}</p></Col></Row>
-                        <Row><Col sm={2}><Likes setRefresh={setRefresh} /></Col>{sessionStorage.userProfileId == singleUserProfile.id ? <div><Col><Button id={artPost.id} onClick={handleOpenEdit}>Edit</Button></Col> <Col><Button id={artPost.id} onClick={handleDelete}>Delete</Button></Col> </div> : <Col><Favorites setRefresh={setRefresh} /></Col>}</Row>
-                        <CommentList refresh={refresh} setRefresh={setRefresh} />
+
+
+
 
                     </Col>
 
                     <Col sm={2} className="ArtistDetails">
-                        <Row><h2>{singleUserProfile.displayName}</h2></Row>
+
                         <Row><img class="userProfileImg" src={singleUserProfile.image}></img></Row>
-                        <Row><p>{singleUserProfile.description}</p></Row>
-                        <Row><Following setRefresh={setRefresh} /> <NavLink to={`/profile/${singleUserProfile.id}`}><Button>Details</Button></NavLink></Row>
+                        <Row><Col className="UserDisplayName"><h2>{singleUserProfile.displayName}</h2></Col></Row>
+                        <Row><Col className="UserDescription"><p className="UserDescription">{singleUserProfile.description}</p></Col></Row>
+                        <Row><Col className="Following"><Following setRefresh={setRefresh} /></Col> <Col><NavLink to={`/profile/${singleUserProfile.id}`}><Button>Details</Button></NavLink></Col></Row>
+                        <div class="wrapper">
+                            <div class="divider div-transparent div-arrow-down"></div>
+                        </div>
+                        <Row ><Col><h2 className="PostTitle">{artPost.title}</h2></Col></Row>
+                        <Col className="PostDesc"><p >{artPost.description}</p></Col>
+                        <Row><Likes setRefresh={setRefresh} />{sessionStorage.userProfileId == singleUserProfile.id ? <Row><Col ><Button className="EditPostButton" id={artPost.id} onClick={handleOpenEdit}>Edit</Button></Col> <Col><Button className="EditPostButton" id={artPost.id} onClick={handleDelete}>Delete</Button></Col></Row> : <Col className="Favorite" sm={7}><Favorites setRefresh={setRefresh} /></Col>}</Row>
+                        <div class="wrapper">
+                            <div class="divider div-transparent div-arrow-down"></div>
+                        </div>
+                        <CommentList refresh={refresh} setRefresh={setRefresh} />
 
                     </Col>
 
