@@ -72,4 +72,15 @@ insert into ArtPost(Id, UserProfileId, Image, Title,PostDate, Description, Categ
 
 set identity_insert [ArtPost] off
 
+set identity_insert [Following] on
+insert into Following(Id, SubscriberId, SubscribedToId) values(1, 3, 2)
+insert into Following(Id, SubscriberId, SubscribedToId) values(2, 3, 4)
+insert into Following(Id, SubscriberId, SubscribedToId) values(3, 3, 5)
+set identity_insert [Following] off
+
+set identity_insert [Comments] on
+insert into Comments(Id, UserProfileId, PostId, Content, PostDate) values (1, 2, 5, 'Wow! What program was that made with?', '11-03-2020')
+insert into Comments(Id, UserProfileId, PostId, Content, PostDate) values (2, 4, 5, 'Thats crazy man good work!', '11-02-2020')
+
+set identity_insert [Comments] off
 GO

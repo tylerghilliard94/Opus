@@ -133,9 +133,9 @@ export default function PostDetails() {
         widget.open()
     }
     if (isLoading) {
-        return <Spinner animation="border" role="status">
+        return <div className="HomeContainer"><Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>
-        </Spinner>
+        </Spinner></div>
     }
     if (postEdit == 1) {
         return (
@@ -158,11 +158,7 @@ export default function PostDetails() {
                                             <Label className="PostDescriptionLabel" htmlFor="description">Description</Label>
                                             <textarea className="PostDescriptionEdit" id="Description" defaultValue={localArtPost.Description} type="text" onChange={handleChange} />
                                         </FormGroup>
-                                        <FormGroup>
-                                            <div>
-                                                <Button className="UploadPictureButtonPost" onClick={showWidget}>Upload Photo</Button> <p>{imageName}</p>
-                                            </div>
-                                        </FormGroup>
+
 
                                         <FormGroup>
                                             <Label className="PostCategoryEdit" for="category">Category</Label>
