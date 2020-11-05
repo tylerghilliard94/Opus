@@ -63,9 +63,9 @@ export default function PostDetails() {
     console.log(singleUserProfile)
 
     if (isLoading) {
-        return <Spinner animation="border" role="status">
+        return <div className="HomeContainer"><Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>
-        </Spinner>
+        </Spinner></div>
     }
     return (
         <>
