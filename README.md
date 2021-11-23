@@ -70,7 +70,7 @@ Coming from a art background it really was important for me to have a place to s
 
 
 
-## Special Thanks: Ethan Neal and Catie Adams for allows me to use some of their art of this project.!
+## Special Thanks: Ethan Neal and Catie Adams for allowing me to use some of their art of this project!
 
 ## Technology Stack: 
 * ASP.NET
